@@ -1,4 +1,5 @@
 #include "TitleScene.h"
+#include "Engine/SceneManager.h"
 
 TitleScene::TitleScene(GameObject* parent)
 	:GameObject(parent,"TitleScene"),tPict_(-1)
@@ -17,6 +18,11 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
+	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+	if (CheckHitKey(KEY_INPUT_T))
+	{
+		pSceneManager->ChangeScene(SCENE_ID_PLAY);
+	}
 }
 
 void TitleScene::Draw()
