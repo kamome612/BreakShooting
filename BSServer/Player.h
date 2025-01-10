@@ -20,4 +20,8 @@ public:
 
 	//ŠJ•ú
 	void Release() override;
+private:
+	int pImage_;
+	int lImage_;
+
 };
