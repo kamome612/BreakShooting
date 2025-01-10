@@ -3,5 +3,6 @@
 class Bullet :
     public GameObject
 {
+    //‚Ä‚·‚Æ‚Ç‚·
 };
 
