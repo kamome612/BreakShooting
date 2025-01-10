@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BSC.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Engine\CsvReader.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
@@ -147,9 +148,14 @@
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Engine\time.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Engine\CsvReader.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\Global.h" />
@@ -157,6 +163,10 @@
     <ClInclude Include="Engine\SceneManager.h" />
     <ClInclude Include="Engine\time.h" />
     <ClInclude Include="Engine\Transform.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="ResultScene.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
