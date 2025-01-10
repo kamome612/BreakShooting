@@ -1,10 +1,5 @@
 #include "sceneManager.h"
 
-#include "../TestScene.h"
-#include "../TitleScene.h"
-#include "../PlayScene.h"
-#include "../ResultScene.h"
-#include "../ExplanationScene.h"
 #include "time.h"
 
 //コンストラクタ
