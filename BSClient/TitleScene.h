@@ -1,14 +1,16 @@
 #pragma once
 #include "Engine/GameObject.h"
-class ResultScene :
+class TitleScene :
     public GameObject
 {
+private:
+	int tPict_;
 public:
-	//コンストラクタ
-	ResultScene(GameObject* parent);
+    //コンストラクタ
+    TitleScene(GameObject* parent);
 
-	//デストラクタ
-	~ResultScene();
+    //デストラクタ
+    ~TitleScene();
 
 	//初期化
 	void Initialize() override;
