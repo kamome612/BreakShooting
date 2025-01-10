@@ -29,9 +29,9 @@ void Player::Update()
 		moveX -= SPEED * Time::DeltaTime();
 	}
 
-	if (CheckHitKey(KEY_INPUT_SPACE)) {
+	/*if (CheckHitKey(KEY_INPUT_SPACE)) {
 		Bullet* bullet = Instantiate<Bullet>(GetParent());
-	}
+	}*/
 }
 
 void Player::Draw()
