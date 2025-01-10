@@ -7,6 +7,7 @@ namespace {
 }
 
 Player::Player(GameObject* parent)
+	:GameObject(parent,"Player")
 {
 }
 
