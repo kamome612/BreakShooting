@@ -1,5 +1,6 @@
 #include "sceneManager.h"
 #include "../TestScene.h"
+#include "../PlayScene.h"
 #include "time.h"
 
 //コンストラクタ

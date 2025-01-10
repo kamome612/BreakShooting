@@ -1,5 +1,6 @@
 #include "sceneManager.h"
 #include "../TestScene.h"
+#include "../PlayScene.h"
 #include "time.h"
 
 //コンストラクタ
@@ -35,6 +36,7 @@ void SceneManager::Update()
 		switch (nextSceneID_)
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
+		//case SCENE_ID_PLAY: Instantiate<TestScene>(this); break;
 		}
 		currentSceneID_ = nextSceneID_;
 	}
