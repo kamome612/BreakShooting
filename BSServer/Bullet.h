@@ -3,7 +3,7 @@
 class Bullet :
     public GameObject
 {
-    // ①一通りの動作　２、当たり判定　３，反射　
+ 
 public :
     Bullet(GameObject* parent);
 
