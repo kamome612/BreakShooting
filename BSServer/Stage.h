@@ -5,6 +5,7 @@ class Stage :
 {
 private:
 	int Cr;
+	int Image_;
 public:
 	//引数：parent  親オブジェクト（SceneManager）
 	Stage(GameObject* parent);
