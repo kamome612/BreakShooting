@@ -147,6 +147,7 @@
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Engine\time.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\CsvReader.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Engine\SceneManager.h" />
     <ClInclude Include="Engine\time.h" />
     <ClInclude Include="Engine\Transform.h" />
+    <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #include "sceneManager.h"
-
+#include "../TestScene.h"
 #include "time.h"
 
 //コンストラクタ
@@ -19,7 +19,7 @@ void SceneManager::Initialize()
 	//最初のシーンを準備
 	currentSceneID_ = SCENE_ID_TITLE;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<TitleScene>(this);
+	Instantiate<TestScene>(this);
 }
 
 //更新
@@ -35,10 +35,6 @@ void SceneManager::Update()
 		switch (nextSceneID_)
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
-		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
-		case SCENE_ID_EXPLANATION:Instantiate<ExplanationScene>(this); break;
-		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
-		case SCENE_ID_RESULT: Instantiate<ResultScene>(this); break;
 
 		}
 		currentSceneID_ = nextSceneID_;
