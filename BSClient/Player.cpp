@@ -1,20 +1,23 @@
 #include "Player.h"
 #include "Engine/time.h"
 #include "Bullet.h"
+
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 50;
+	const XMFLOAT3 INIT_POS = { 320,180,0 };//Å‰‚ÌˆÊ’u
 }
 
 Player::Player(GameObject* parent)
 {
-	transform_.position_ = { 320,180,0 };
+	transform_.position_ = INIT_POS;
 }
 
 void Player::Initialize()
 {
 	pImage_ = LoadGraph("Assets\\chara.png");
 	assert(pImage_ >= 0);
+	transform_.position_ = INIT_POS;
 }
 
 void Player::Update()
@@ -24,7 +27,7 @@ void Player::Update()
 	moveY = 0.0f;
 
 	if (CheckHitKey(KEY_INPUT_D)) {
-		moveX += SPEED * Time::DeltaTime();
+		transform_.position_.x += SPEED * Time::DeltaTime();
 	}
 	else if (CheckHitKey(KEY_INPUT_A)) {
 		moveX -= SPEED * Time::DeltaTime();
@@ -39,7 +42,7 @@ void Player::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	DrawRectGraph(x, y, CHIP_SIZE, CHIP_SIZE, CHIP_SIZE, CHIP_SIZE, pImage_, TRUE);
+	DrawGraph(x, y, pImage_, TRUE);
 }
 
 void Player::Release()
