@@ -11,6 +11,7 @@ Bullet::Bullet(GameObject* parent)
 	:GameObject(parent, "Bullet"), hImage_(-1)
 {
 
+
 }
 
 Bullet::~Bullet()

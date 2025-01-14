@@ -39,7 +39,7 @@ void SceneManager::Update()
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
-		case SCENE_ID_PLAY: Instantiate<TestScene>(this); break;
+		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 		case SCENE_ID_RESULT: Instantiate<ResultScene>(this); break;
 		}
 		currentSceneID_ = nextSceneID_;
