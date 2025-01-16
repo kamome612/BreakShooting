@@ -3,21 +3,18 @@
 class Bullet :
     public GameObject
 {
- 
-public :
+
+public:
     Bullet(GameObject* parent);
 
-    ~Bullet();
-    
     void Initialize() override;
-    void SetPosition(float x,float y);
+    void SetPosition(float x, float y);
     void Update() override;
     void Draw() override;
 
 private:
     int hImage_;
-    
-
+    float BulletTime_;
 
 };
 

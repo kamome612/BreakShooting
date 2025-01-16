@@ -2,42 +2,34 @@
 #include"Engine/time.h"
 
 namespace
-{ 
-	const float Speed_{ 10.0 };
-
+{
+	const float Speed_{ 500.0 };
+	const float LimitTime_ = 2.0f;
 
 }
 Bullet::Bullet(GameObject* parent)
-	:GameObject(parent,"Bullet"),hImage_(-1)
+	:GameObject(parent, "Bullet"), hImage_(-1), BulletTime_(0)
 {
-	
-}
 
-Bullet::~Bullet()
-{
-	if (hImage_ > 0)
-		DeleteGraph(hImage_);
 }
 
 void Bullet::Initialize()
 {
-	hImage_ = LoadGraph("Assets\Image\missile.png");
+	hImage_ = LoadGraph("Assets\\Image\\missile.png");
 	assert(hImage_ > 0);
-
 }
 
 
 void Bullet::Update()
 {
-	transform_.position_.y += Speed_ * Time::DeltaTime();
-	
-	//if (CheckHitKey(KEY_INPUT_SPACE))//テスト
-	//{
-	//	transform_.position_.y += Speed_ * Time::DeltaTime();
-	//}
-	
+	BulletTime_ += Time::DeltaTime();
+	if (BulletTime_ >= LimitTime_)
+	{
+		KillMe();
+	}
 
-	// 距離でKill　、　反射の数　、　敵に当たったら　、　　
+	transform_.position_.y -= Speed_ * Time::DeltaTime();
+
 }
 
 void Bullet::Draw()
@@ -45,13 +37,12 @@ void Bullet::Draw()
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
 
-	DrawGraph(x, y, hImage_, TRUE); //画像の表示
-
+	DrawGraph(x, y, hImage_, TRUE);
 }
 
 
-void Bullet::SetPosition(float x, float y)
+void Bullet::SetPosition(float _x, float _y)
 {
-	transform_.position_.x = x;
-	transform_.position_.y = y;
+	transform_.position_.x = _x;
+	transform_.position_.y = _y;
 }
