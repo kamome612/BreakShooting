@@ -35,9 +35,10 @@ void Player::Update()
 		transform_.position_.x -= moveX;
 	}
 
-	/*if (CheckHitKey(KEY_INPUT_SPACE)) {
+	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		Bullet* bullet = Instantiate<Bullet>(GetParent());
-	}*/
+		bullet->SetPosition(transform_.position_.x, transform_.position_.y);
+	}
 }
 
 void Player::Draw()
