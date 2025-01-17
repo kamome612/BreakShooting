@@ -2,6 +2,9 @@
 #include <WS2tcpip.h>
 #pragma comment( lib, "ws2_32.lib" )
 
+SOCKET sock;
+SOCKADDR_IN serverAddr;
+
 #include "DxLib.h"
 
 #include "Engine/global.h"
@@ -40,7 +43,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	// UDPソケットの作成
-	SOCKET sock;
+	//SOCKET sock;
 	sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if (sock == INVALID_SOCKET) {
 		return 0;
@@ -54,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	// サーバアドレスの指定
-	SOCKADDR_IN serverAddr;
+	//SOCKADDR_IN serverAddr;
 	int addrlen = sizeof(serverAddr);
 
 	//サーバの宛先情報セット

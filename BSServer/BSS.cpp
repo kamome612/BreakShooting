@@ -2,6 +2,9 @@
 #include <WS2tcpip.h>
 #pragma comment( lib, "ws2_32.lib" )
 
+SOCKET sock;
+SOCKADDR_IN bindAddr;
+
 #include "DxLib.h"
 
 #include "Engine/global.h"
@@ -38,7 +41,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	// UDPソケットの作成
-	SOCKET sock;
+	//SOCKET sock;
 	sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if (sock == INVALID_SOCKET) {
 		//エラー処理
@@ -54,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	// 固定アドレスの割り当て
-	SOCKADDR_IN bindAddr;
+	//SOCKADDR_IN bindAddr;
 	memset(&bindAddr, 0, sizeof(bindAddr));//0クリアで初期化
 	bindAddr.sin_family = AF_INET;
 	bindAddr.sin_port = htons(SERVER_PORT);
@@ -144,4 +147,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	DxLib_End();
 	return 0;
+}
+
+SOCKET GetSock()
+{
+	return sock;
+}
+
+SOCKADDR_IN GetAddr()
+{
+	return bindAddr;
 }

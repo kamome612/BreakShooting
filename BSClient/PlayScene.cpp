@@ -1,6 +1,5 @@
 #include "PlayScene.h"
 #include "Stage.h"
-#include "Player.h"
 PlayScene::PlayScene(GameObject* parent)
 	: GameObject(parent,"PlayScene")
 {
@@ -11,12 +10,17 @@ void PlayScene::Initialize()
 	Image_ = LoadGraph("Assets\\Play.jpg");
 	assert(Image_ >= 0);
 	Stage* pStage = Instantiate<Stage>(this);
-	Player* pPlayer = Instantiate<Player>(GetParent());
+	pPlayer = Instantiate<Player>(GetParent());
+	//ePlayer = Instantiate<Player>(GetParent());
 	
 }
 
 void PlayScene::Update()
 {
+	/*ePlayer->SendData();
+	pPlayer->RecvData();
+	pPlayer->SendData();
+	ePlayer->RecvData();*/
 }
 
 void PlayScene::Draw()

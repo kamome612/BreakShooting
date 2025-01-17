@@ -77,3 +77,38 @@ void Player::Draw()
 void Player::Release()
 {
 }
+
+void Player::RecvData()
+{
+	//int ret;
+	//struct sockaddr_in clientAddr;//クライアントアドレス情報格納領域
+	//int addrlen = sizeof(clientAddr);
+	//XMFLOAT3 trs;
+	//ret = recvfrom(sock,(char*)&trs, sizeof(trs), 0, (SOCKADDR*)&clientAddr, &addrlen);
+	//if (ret > 0)
+	//{
+	//	//バイトオーダー変換
+	//	transform_.position_.x = ntohl(trs.x);
+	//	transform_.position_.y = ntohl(trs.y);
+	//	transform_.position_.z = ntohl(trs.z);
+	//}
+	//// 受信エラー	未受信時はWSAEWOULDBLOCKが発生
+	//else if (WSAGetLastError() != WSAEWOULDBLOCK)
+	//{
+	//	// 受信失敗のエラー処理
+	//	return;
+	//}
+}
+
+void Player::SendData()
+{
+	//XMFLOAT3 trs = { htonl(transform_.position_.x),htonl(transform_.position_.y),htonl(transform_.position_.z) };
+	//int ret = sendto(sock, (char*)&trs, sizeof(trs), 0, (SOCKADDR*)&bindAddr, sizeof(bindAddr);
+	//// 未送信以外のエラー
+	//if (ret == SOCKET_ERROR && WSAGetLastError() != WSAEWOULDBLOCK)
+	//{
+	//	// エラー処理
+	//	return;
+	//}
+
+}
