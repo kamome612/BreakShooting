@@ -23,5 +23,8 @@ public:
 private:
 	int pImage_;
 	int lImage_;
+	int dImage_;
+	int fImage_;
+	int Life_;
 };
 
