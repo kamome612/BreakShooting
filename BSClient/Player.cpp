@@ -72,6 +72,8 @@ void Player::Draw()
 		//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
 		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
 	}
+
+	DrawBox(x+15, y, x+CHIP_SIZE-15,y+CHIP_SIZE, GetColor(0, 0, 0), FALSE);//“–‚½‚è”»’èŠm”F—p
 }
 
 void Player::Release()
