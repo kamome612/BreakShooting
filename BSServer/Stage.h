@@ -6,6 +6,8 @@ class Stage :
 private:
 	int Cr;
 	int Image_;
+	float width_;
+	float height_;
 public:
 	//引数：parent  親オブジェクト（SceneManager）
 	Stage(GameObject* parent);
@@ -22,6 +24,7 @@ public:
 	//開放
 	void Release() override;
 
-	bool CollideCircle(float x, float y, float r);
+	//bool CollideCircle(float x, float y, float r);
+	bool IsRectIntersectsOtherRect(float x, float y, float w,float h);
 
 };
