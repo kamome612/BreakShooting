@@ -2,6 +2,7 @@
 #include "Engine/time.h"
 #include "Bullet.h"
 #include "Stage.h"
+
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
@@ -31,6 +32,11 @@ void Player::Initialize()
 
 void Player::Update()
 {
+	Stage pStage = Stage(GetParent());
+
+	float x= transform_.position_.x;
+	float y = transform_.position_.y;
+
 	float moveX, moveY;
 	moveX = 0.0f;
 	moveY = 0.0f;
@@ -49,8 +55,9 @@ void Player::Update()
 		bullet->SetPosition(transform_.position_.x, transform_.position_.y);
 	}
 
-	/*Stage* pStage = GetParent()->FindGameObject<Stage>();
-	if(pStage->CollideCircle(transform_.position))*/
+	if (pStage.IsRectIntersectsOtherRect(x, y, CHIP_SIZE, CHIP_SIZE)) {
+
+	}
 }
 
 void Player::Draw()
@@ -124,14 +131,14 @@ void Player::SetPosition(float _x, float _y)
 	transform_.position_.y = _y;
 }
 
-bool Player::CollideRect(float x, float y, float w, float h)
-{
-	// プレイヤーの矩形の左上と右下の座標を計算
-	//float playerLeft = transform_.position_.x + 15; // プレイヤーの左上X座標
-	//float playerTop = transform_.position_.y;       // プレイヤーの上Y座標
-	//float playerRight = transform_.position_.x + CHIP_SIZE - 15; // プレイヤーの右下X座標
-	//float playerBottom = transform_.position_.y + CHIP_SIZE;    // プレイヤーの下Y座標
-}
+//bool Player::CollideRect(float x, float y, float w, float h)
+//{
+//	 //プレイヤーの矩形の左上と右下の座標を計算
+//	float playerLeft = transform_.position_.x + 15; // プレイヤーの左上X座標
+//	float playerTop = transform_.position_.y;       // プレイヤーの上Y座標
+//	float playerRight = transform_.position_.x + CHIP_SIZE - 15; // プレイヤーの右下X座標
+//	float playerBottom = transform_.position_.y + CHIP_SIZE;    // プレイヤーの下Y座標
+//}
 
 //bool Player::CollideBox(float x, float y, float r)
 //{

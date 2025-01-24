@@ -30,7 +30,7 @@ public:
 	//位置をセット
 	void SetPosition(float _x, float _y);
 
-	bool CollideRect(float x, float y, float w, float h);
+	//bool CollideRect(float x, float y, float w, float h);
 private:
 	int pImage_;
 	int lImage_;
