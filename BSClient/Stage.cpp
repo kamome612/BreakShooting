@@ -18,7 +18,7 @@ void Stage::Draw()
 {
 	
 	DrawBox(100, 100, 1200, 680, Cr, FALSE);
-	//DrawOval(640, 360,550,350, Cr, FALSE);
+	//DrawOval(640, 360,Å@550,Å@350, Cr, FALSE);
 	
 }
 
