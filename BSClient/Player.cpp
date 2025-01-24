@@ -124,9 +124,13 @@ void Player::SetPosition(float _x, float _y)
 	transform_.position_.y = _y;
 }
 
-bool Player::collideRect(float x, float y, float w, float h)
+bool Player::CollideRect(float x, float y, float w, float h)
 {
-	return false;
+	// プレイヤーの矩形の左上と右下の座標を計算
+	//float playerLeft = transform_.position_.x + 15; // プレイヤーの左上X座標
+	//float playerTop = transform_.position_.y;       // プレイヤーの上Y座標
+	//float playerRight = transform_.position_.x + CHIP_SIZE - 15; // プレイヤーの右下X座標
+	//float playerBottom = transform_.position_.y + CHIP_SIZE;    // プレイヤーの下Y座標
 }
 
 //bool Player::CollideBox(float x, float y, float r)
