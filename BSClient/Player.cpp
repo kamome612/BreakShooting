@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Engine/time.h"
 #include "Bullet.h"
-
+#include "Stage.h"
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
@@ -48,6 +48,9 @@ void Player::Update()
 		Bullet* bullet = Instantiate<Bullet>(GetParent());
 		bullet->SetPosition(transform_.position_.x, transform_.position_.y);
 	}
+
+	/*Stage* pStage = GetParent()->FindGameObject<Stage>();
+	if(pStage->CollideCircle(transform_.position))*/
 }
 
 void Player::Draw()
@@ -72,6 +75,8 @@ void Player::Draw()
 		//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
 		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
 	}
+
+	DrawBox(x+15, y, x+CHIP_SIZE-15,y+CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 }
 
 void Player::Release()
@@ -112,3 +117,34 @@ void Player::SendData()
 	//}
 
 }
+
+void Player::SetPosition(float _x, float _y)
+{
+	transform_.position_.x = _x;
+	transform_.position_.y = _y;
+}
+
+bool Player::collideRect(float x, float y, float w, float h)
+{
+	return false;
+}
+
+//bool Player::CollideBox(float x, float y, float r)
+//{
+//
+//	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
+//	//x,y,rが相手の円の情報
+//	//自分の円の情報
+//	float myCenterX = transform_.position_.x +15;
+//	float myCenterY = transform_.position_.y + (float)CHIP_SIZE / 2;
+//	float myR = 16.0f;
+//	float dx = myCenterX - x;
+//	float dy = myCenterY - y;
+//	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
+//		return true;
+//	}
+//	else {
+//		return false;
+//	}
+//	return false;
+//}

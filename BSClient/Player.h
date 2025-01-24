@@ -26,6 +26,11 @@ public:
 
 	//データ送信
 	void SendData();
+
+	//位置をセット
+	void SetPosition(float _x, float _y);
+
+	bool collideRect(float x, float y, float w, float h);
 private:
 	int pImage_;
 	int lImage_;
