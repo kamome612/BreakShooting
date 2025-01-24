@@ -22,4 +22,6 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
+	bool CollideCircle(float x, float y, float r);
+
 };
