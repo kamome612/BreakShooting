@@ -26,6 +26,9 @@ public:
 
 	//データ送信
 	void SendData();
+
+	//位置をセット
+	void SetPosition(float _x, float _y);
 private:
 	int pImage_;
 	int lImage_;

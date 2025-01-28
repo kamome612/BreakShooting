@@ -7,6 +7,10 @@ namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
 	const XMFLOAT3 INIT_POS = { 320,180,0 };//最初の位置
+	const float RWIDTH = 1200; //ステージの右
+	const float LWIDTH = 100; //ステージの左
+	const float HEIGHT = 680; //ステージの高さ
+	const float MARGIN = 15; //余白
 }
 
 Player::Player(GameObject* parent)
@@ -32,8 +36,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	Stage pStage = Stage(GetParent());
-
 	float x= transform_.position_.x;
 	float y = transform_.position_.y;
 
@@ -43,20 +45,27 @@ void Player::Update()
 
 	if (CheckHitKey(KEY_INPUT_D)) {
 		moveX = SPEED * Time::DeltaTime();
-		transform_.position_.x += moveX;
+		if (transform_.position_.x < RWIDTH-CHIP_SIZE+MARGIN) {
+			transform_.position_.x += moveX;
+		}
+		else {
+			transform_.position_.x = RWIDTH - CHIP_SIZE + MARGIN; //飛び出したりガタガタしないように
+		}
+		
 	}
 	else if (CheckHitKey(KEY_INPUT_A)) {
 		moveX = SPEED * Time::DeltaTime();
-		transform_.position_.x -= moveX;
+		if (transform_.position_.x > LWIDTH-MARGIN) {
+			transform_.position_.x -= moveX;
+		}
+		else {
+			transform_.position_.x = LWIDTH - MARGIN; //飛び出したりがたがたしないように
+		}
 	}
 
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		Bullet* bullet = Instantiate<Bullet>(GetParent());
 		bullet->SetPosition(transform_.position_.x, transform_.position_.y);
-	}
-
-	if (pStage.IsRectIntersectsOtherRect(x, y, CHIP_SIZE, CHIP_SIZE)) {
-
 	}
 }
 
@@ -130,32 +139,3 @@ void Player::SetPosition(float _x, float _y)
 	transform_.position_.x = _x;
 	transform_.position_.y = _y;
 }
-
-//bool Player::CollideRect(float x, float y, float w, float h)
-//{
-//	 //プレイヤーの矩形の左上と右下の座標を計算
-//	float playerLeft = transform_.position_.x + 15; // プレイヤーの左上X座標
-//	float playerTop = transform_.position_.y;       // プレイヤーの上Y座標
-//	float playerRight = transform_.position_.x + CHIP_SIZE - 15; // プレイヤーの右下X座標
-//	float playerBottom = transform_.position_.y + CHIP_SIZE;    // プレイヤーの下Y座標
-//}
-
-//bool Player::CollideBox(float x, float y, float r)
-//{
-//
-//	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
-//	//x,y,rが相手の円の情報
-//	//自分の円の情報
-//	float myCenterX = transform_.position_.x +15;
-//	float myCenterY = transform_.position_.y + (float)CHIP_SIZE / 2;
-//	float myR = 16.0f;
-//	float dx = myCenterX - x;
-//	float dy = myCenterY - y;
-//	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
-//		return true;
-//	}
-//	else {
-//		return false;
-//	}
-//	return false;
-//}

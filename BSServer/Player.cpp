@@ -6,6 +6,10 @@ namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
 	const XMFLOAT3 INIT_POS = { 320,540,0 };//最初の位置
+	const float RWIDTH = 1200; //ステージの右
+	const float LWIDTH = 100; //ステージの左
+	const float HEIGHT = 680; //ステージの高さ
+	const float MARGIN = 15; //余白
 }
 
 Player::Player(GameObject* parent)
@@ -31,17 +35,31 @@ void Player::Initialize()
 
 void Player::Update()
 {
+	float x = transform_.position_.x;
+	float y = transform_.position_.y;
+
 	float moveX, moveY;
 	moveX = 0.0f;
 	moveY = 0.0f;
 
 	if (CheckHitKey(KEY_INPUT_D)) {
 		moveX = SPEED * Time::DeltaTime();
-		transform_.position_.x += moveX;
+		if (transform_.position_.x < RWIDTH - CHIP_SIZE + MARGIN) {
+			transform_.position_.x += moveX;
+		}
+		else {
+			transform_.position_.x = RWIDTH - CHIP_SIZE + MARGIN; //飛び出したりガタガタしないように
+		}
+
 	}
 	else if (CheckHitKey(KEY_INPUT_A)) {
 		moveX = SPEED * Time::DeltaTime();
-		transform_.position_.x -= moveX;
+		if (transform_.position_.x > LWIDTH - MARGIN) {
+			transform_.position_.x -= moveX;
+		}
+		else {
+			transform_.position_.x = LWIDTH - MARGIN; //飛び出したりがたがたしないように
+		}
 	}
 
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
@@ -113,4 +131,10 @@ void Player::SendData()
 	//	return;
 	//}
 
+}
+
+void Player::SetPosition(float _x, float _y)
+{
+	transform_.position_.x = _x;
+	transform_.position_.y = _y;
 }
