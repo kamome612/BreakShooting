@@ -53,15 +53,16 @@ void Player::Update()
 		}
 		
 	}
-	else if (CheckHitKey(KEY_INPUT_A)) {
+	if (CheckHitKey(KEY_INPUT_A)) {
 		moveX = SPEED * Time::DeltaTime();
-		if (transform_.position_.x > LWIDTH-MARGIN) {
+		if (transform_.position_.x > LWIDTH - MARGIN) {
 			transform_.position_.x -= moveX;
 		}
 		else {
 			transform_.position_.x = LWIDTH - MARGIN; //îÚÇ—èoÇµÇΩÇËÇ™ÇΩÇ™ÇΩÇµÇ»Ç¢ÇÊÇ§Ç…
 		}
 	}
+	
 
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		Bullet* bullet = Instantiate<Bullet>(GetParent());
