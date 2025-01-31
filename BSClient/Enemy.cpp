@@ -4,7 +4,7 @@
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
-	const XMFLOAT3 INIT_POS = { 320,180,0 };
+	const XMFLOAT3 INIT_POS = { 320,540,0 };
 }
 Enemy::Enemy(GameObject* parent)
 	:GameObject(parent,"Enemy"),pImage_(-1),lImage_(-1),dImage_(-1),
