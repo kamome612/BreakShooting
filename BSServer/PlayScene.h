@@ -1,12 +1,16 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include "Player.h"
+#include "Enemy.h"
+
 class PlayScene :
 	public GameObject
 {
+private:
 	int Image_;
 	Player* pPlayer;
-	//Player* ePlayer;
+	Enemy* pEnemy;
+	int sock;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

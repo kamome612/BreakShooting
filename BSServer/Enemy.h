@@ -1,18 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include "Player.h"
-#include "Enemy.h"
-class PlayScene :
+class Enemy :
     public GameObject
 {
-	int Image_;
-	Player* pPlayer;
-	Enemy* pEnemy;
-	int sock;
 public:
-	//コンストラクタ
-	//引数：parent  親オブジェクト（SceneManager）
-	PlayScene(GameObject* parent);
+    //コンストラクタ
+    Enemy(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
@@ -25,5 +18,12 @@ public:
 
 	//開放
 	void Release() override;
+
+private:
+	int pImage_;
+	int lImage_;
+	int dImage_;
+	int fImage_;
+	int Life_;
 };
 

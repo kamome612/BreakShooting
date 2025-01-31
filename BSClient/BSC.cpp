@@ -2,8 +2,8 @@
 #include <WS2tcpip.h>
 #pragma comment( lib, "ws2_32.lib" )
 
-SOCKET sock;
-SOCKADDR_IN serverAddr;
+//SOCKET sock;
+//SOCKADDR_IN serverAddr;
 
 #include "DxLib.h"
 
@@ -19,10 +19,10 @@ namespace Screen {
 };
 
 // サーバのIPアドレス
-const char* SERVER_ADDRESS = "127.0.0.1";
+//const char* SERVER_ADDRESS = "127.0.0.1";
 //const char* SERVER_ADDRESS = "192.168.43.38";       // 接続先なんか適当にクラスメートとやって！
 // サーバのポート番号
-const unsigned short SERVER_PORT = 8888;
+//const unsigned short SERVER_PORT = 8888;
 
 struct CIRCLE
 {
@@ -44,27 +44,27 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	// UDPソケットの作成
 	//SOCKET sock;
-	sock = socket(AF_INET, SOCK_DGRAM, 0);
-	if (sock == INVALID_SOCKET) {
-		return 0;
-	}
+	//sock = socket(AF_INET, SOCK_DGRAM, 0);
+	//if (sock == INVALID_SOCKET) {
+	//	return 0;
+	//}
 
-	// sockをノンブロッキングモードに
-	unsigned long cmdarg = 0x01;
-	int ret = ioctlsocket(sock, FIONBIO, &cmdarg);
-	if (ret == SOCKET_ERROR) {
-		return 0;
-	}
+	//// sockをノンブロッキングモードに
+	//unsigned long cmdarg = 0x01;
+	//int ret = ioctlsocket(sock, FIONBIO, &cmdarg);
+	//if (ret == SOCKET_ERROR) {
+	//	return 0;
+	//}
 
-	// サーバアドレスの指定
-	//SOCKADDR_IN serverAddr;
-	int addrlen = sizeof(serverAddr);
+	//// サーバアドレスの指定
+	////SOCKADDR_IN serverAddr;
+	//int addrlen = sizeof(serverAddr);
 
-	//サーバの宛先情報セット
-	memset(&serverAddr, 0, sizeof(serverAddr));
-	serverAddr.sin_family = AF_INET;
-	serverAddr.sin_port = htons(SERVER_PORT);
-	inet_pton(AF_INET, (PCSTR)SERVER_ADDRESS, &serverAddr.sin_addr.s_addr);
+	////サーバの宛先情報セット
+	//memset(&serverAddr, 0, sizeof(serverAddr));
+	//serverAddr.sin_family = AF_INET;
+	//serverAddr.sin_port = htons(SERVER_PORT);
+	//inet_pton(AF_INET, (PCSTR)SERVER_ADDRESS, &serverAddr.sin_addr.s_addr);
 
 
 	SetGraphMode(Screen::WIDTH, Screen::HEIGHT, 32);
@@ -101,23 +101,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		pRootObject->DrawSub();
 
 		// サイズとか色はお任せ
-		CIRCLE circle = { 0, 0, 20, GetColor(138,43,226) };
-		// マウス座標取得し、circleのcenterXとcenterTに格納
-		GetMousePoint(&circle.centerX, &circle.centerY);
-		// 描画
-		DrawCircle(circle.centerX, circle.centerY, circle.size, circle.color, 1);
+		//CIRCLE circle = { 0, 0, 20, GetColor(138,43,226) };
+		//// マウス座標取得し、circleのcenterXとcenterTに格納
+		//GetMousePoint(&circle.centerX, &circle.centerY);
+		//// 描画
+		//DrawCircle(circle.centerX, circle.centerY, circle.size, circle.color, 1);
 
-		// サーバ( serverAddr )に●の情報送信
-		CIRCLE sendCircle = { htonl(circle.centerX),htonl(circle.centerY),htonl(circle.size),htonl(circle.color) };
-		int ret = sendto(sock, (char*)&sendCircle, sizeof(sendCircle), 0, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
+		//// サーバ( serverAddr )に●の情報送信
+		//CIRCLE sendCircle = { htonl(circle.centerX),htonl(circle.centerY),htonl(circle.size),htonl(circle.color) };
+		//int ret = sendto(sock, (char*)&sendCircle, sizeof(sendCircle), 0, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
 
 
-		// 未送信以外のエラー
-		if (ret == SOCKET_ERROR && WSAGetLastError() != WSAEWOULDBLOCK)
-		{
-			// エラー処理
-			return 0;
-		}
+		//// 未送信以外のエラー
+		//if (ret == SOCKET_ERROR && WSAGetLastError() != WSAEWOULDBLOCK)
+		//{
+		//	// エラー処理
+		//	return 0;
+		//}
 
 
 		RefreshDxLibDirect3DSetting();

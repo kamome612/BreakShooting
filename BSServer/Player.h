@@ -1,7 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-//テストシーンを管理するクラス
 class Player : public GameObject
 {
 public:
@@ -21,12 +20,6 @@ public:
 	//開放
 	void Release() override;
 
-	//データ受信
-	void RecvData();
-
-	//データ送信
-	void SendData();
-
 	//位置をセット
 	void SetPosition(float _x, float _y);
 private:
@@ -35,5 +28,4 @@ private:
 	int dImage_;
 	int fImage_;
 	int Life_;
-
 };

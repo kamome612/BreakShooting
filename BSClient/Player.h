@@ -21,12 +21,6 @@ public:
 	//開放
 	void Release() override;
 
-	//データ受信
-	void RecvData();
-
-	//データ送信
-	void SendData();
-
 	//位置をセット
 	void SetPosition(float _x, float _y);
 
