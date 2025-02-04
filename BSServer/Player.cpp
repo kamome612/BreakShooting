@@ -62,8 +62,15 @@ void Player::Update()
 	}
 
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
-		Bullet* bullet = Instantiate<Bullet>(GetParent());
-		bullet->SetPosition(transform_.position_.x, transform_.position_.y);
+		if (!isPush_) {
+			Bullet* bullet = Instantiate<Bullet>(GetParent());
+			bullet->SetPosition(transform_.position_.x, transform_.position_.y);
+			isPush_ = true;
+		}
+
+	}
+	else {
+		isPush_ = false;
 	}
 }
 

@@ -8,6 +8,7 @@ public:
     Bullet(GameObject* parent);
 
     void Initialize() override;
+    void WallJuge();
     void SetPosition(float x, float y);
     void Update() override;
     void Draw() override;
@@ -15,6 +16,10 @@ public:
 private:
     int hImage_;
     float BulletTime_;
+    float angle_;//Šp“x
+    float moveX;
+    float moveY;
+
 
 };
 

@@ -31,5 +31,6 @@ private:
 	int dImage_;
 	int fImage_;
 	int Life_;
+	bool isPush_;//’e‚ð‰Ÿ‚µ‚½‚©
 };
 
