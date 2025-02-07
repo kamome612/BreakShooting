@@ -5,6 +5,7 @@ class Stage :
 {
 private:
 	int Cr;
+	int WallCr;
 	int Image_;
 	float width_;
 	float height_;

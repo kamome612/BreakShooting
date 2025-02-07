@@ -27,9 +27,13 @@ void PlayScene::Update()
 	ePlayer->RecvData();*/
 	int ret = 0;
 	IPDATA recvIp;
+	recvIp.d1 = 172;
+	recvIp.d2 = 0;
+	recvIp.d3 = 0;
+	recvIp.d4 = 1;
 	int recvPort;
 	int peek = 0;
-	XMFLOAT3 ePos;
+	XMFLOAT3 ePos = pEnemy->GetPosition();
 	long recvPos[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &recvPos, sizeof(recvPos), peek);
@@ -51,6 +55,11 @@ void PlayScene::Update()
 		// ŽóMŽ¸”s‚ÌƒGƒ‰[ˆ—
 		printfDx("%d", ret);
 	}
+
+	XMFLOAT3 pPos = pPlayer->GetPosition();
+	pPos.y = 180.0f;
+	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
+	ret = NetWorkSendUDP(sock, recvIp, 8888, &sendPos, sizeof(sendPos));
 	
 }
 

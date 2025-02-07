@@ -21,8 +21,28 @@ void Stage::Update()
 
 void Stage::Draw()
 {
+	int Linelength = 60;
+	int LineHeight = 400;
+	int xSStart = 170;
+	int count = 15;
+	int Hcount = 3;
+	//↓ステージの外枠
+	DrawBoxAA(100, 100, 1200, 680, Cr, FALSE);
+	DrawBoxAA(101, 101, 1201, 681, Cr, FALSE);
+	//↓ステージを分断する破壊できる壁
+	for (int i = 0; i < count; i++)
+	{
+		//for (int j = 0; j < count; j++)
+		//{
+		int xS = xSStart + i * (Linelength + 5);
+		int yS = LineHeight;
+		int xE = xS + Linelength;
+		int yE = LineHeight;
+		DrawLine(xS, yS, xE, yE, GetColor(255, 255, 255));
+		//}
 
-	DrawBox(transform_.position_.x,transform_.position_.y , width_, height_, Cr, FALSE);
+	}
+	//DrawBox(transform_.position_.x,transform_.position_.y , width_, height_, Cr, FALSE);
 	//DrawOval(640, 360, 550, 350, Cr, FALSE);
 
 }
