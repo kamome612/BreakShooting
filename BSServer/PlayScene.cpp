@@ -27,9 +27,13 @@ void PlayScene::Update()
 	ePlayer->RecvData();*/
 	int ret = 0;
 	IPDATA recvIp;
+	recvIp.d1 = 172;
+	recvIp.d2 = 0;
+	recvIp.d3 = 0;
+	recvIp.d4 = 1;
 	int recvPort;
 	int peek = 0;
-	XMFLOAT3 ePos;
+	XMFLOAT3 ePos = pEnemy->GetPosition();
 	long recvPos[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &recvPos, sizeof(recvPos), peek);

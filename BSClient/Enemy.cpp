@@ -37,22 +37,22 @@ void Enemy::Draw()
 	int y = (int)transform_.position_.y;
 	DrawGraph(x, y, pImage_, TRUE);
 
-	//ライフの枠
-	int lenF = -120;//x移動
-	DrawExtendGraph(lenF, -175, lenF + 510, 245, fImage_, TRUE);
+	////ライフの枠
+	//int lenF = -120;//x移動
+	//DrawExtendGraph(lenF, -175, lenF + 510, 245, fImage_, TRUE);
 
-	//ライフとライフの下に黒くしたライフを描画
-	int lenYff = 95;//ハートフレームだけのx移動
-	int lenY = 36;   //Y移動
-	for (int j = 0; j < 3; j++) {
-		//DrawGraph((CHIP_SIZE * j) + 40, 30, dImage_, TRUE);
-		DrawExtendGraph((CHIP_SIZE * j) + lenYff, lenY, (CHIP_SIZE * j) + lenYff - 60, lenY + 45, dImage_, TRUE);
-	}
+	////ライフとライフの下に黒くしたライフを描画
+	//int lenYff = 95;//ハートフレームだけのx移動
+	//int lenY = 36;   //Y移動
+	//for (int j = 0; j < 3; j++) {
+	//	//DrawGraph((CHIP_SIZE * j) + 40, 30, dImage_, TRUE);
+	//	DrawExtendGraph((CHIP_SIZE * j) + lenYff, lenY, (CHIP_SIZE * j) + lenYff - 60, lenY + 45, dImage_, TRUE);
+	//}
 
-	for (int i = 0; i < Life_; i++) {
-		//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
-		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
-	}
+	//for (int i = 0; i < Life_; i++) {
+	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
+	//	DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
+	//}
 
 	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 }
