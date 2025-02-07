@@ -21,8 +21,9 @@ void Stage::Update()
 
 void Stage::Draw()
 {
-
-	DrawBox(transform_.position_.x,transform_.position_.y , width_, height_, Cr, FALSE);
+	DrawBoxAA(100, 100, 1200, 680, Cr, FALSE);
+	DrawBoxAA(101, 101, 1201, 681, Cr, FALSE);
+	//DrawBox(transform_.position_.x,transform_.position_.y , width_, height_, Cr, FALSE);
 	//DrawOval(640, 360, 550, 350, Cr, FALSE);
 
 }
