@@ -80,10 +80,10 @@ void Player::Update()
 	std::list<Bullet *> pBullet = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullet) {
 		if (hitFlag_ == false) {
-			if (pBullet->CollideCircle) {
+			/*if (pBullet->CollideCircle) {
 				Life_ -= 1;
 				hitFlag_ = true;
-			}
+			}*/
 		}
 	}
 
