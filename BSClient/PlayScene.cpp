@@ -7,7 +7,7 @@ PlayScene::PlayScene(GameObject* parent)
 
 void PlayScene::Initialize()
 {
-	Image_ = LoadGraph("Assets\\Play.jpg");
+	Image_ = LoadGraph("Assets\\Picture\\PlayScene.jpg");
 	assert(Image_ >= 0);
 	Stage* pStage = Instantiate<Stage>(this);
 	pPlayer = Instantiate<Player>(GetParent());
