@@ -6,7 +6,7 @@
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
-	const XMFLOAT3 INIT_POS = { 320,180,0 };//最初の位置
+	const XMFLOAT3 INIT_POS = { 320,540,0 };//最初の位置
 	const float RWIDTH = 1200; //ステージの右
 	const float LWIDTH = 100; //ステージの左
 	const float HEIGHT = 680; //ステージの高さ
