@@ -1,7 +1,8 @@
 #include "Player.h"
 #include "Engine/time.h"
 #include "Bullet.h"
-
+#include "Bullet.h"
+#include "Stage.h"
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
@@ -10,11 +11,13 @@ namespace {
 	const float LWIDTH = 100; //ステージの左
 	const float HEIGHT = 680; //ステージの高さ
 	const float MARGIN = 15; //余白
+	const float FINV_TIME = 1.0f;
 }
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1),lImage_(-1), dImage_(-1),
-	                               fImage_(-1), Life_(3)
+	                               fImage_(-1), Life_(3),hitFlag_(false),
+	                               invTime_(0)
 {
 }
 
@@ -71,6 +74,26 @@ void Player::Update()
 	}
 	else {
 		isPush_ = false;
+	}
+
+	//弾との当たり判定
+	std::list<Bullet *> pBullet = GetParent()->FindGameObjects<Bullet>();
+	for (Bullet* pBullet : pBullet) {
+		if (hitFlag_ == false) {
+			if (pBullet->CollideCircle) {
+				Life_ -= 1;
+				hitFlag_ = true;
+			}
+		}
+	}
+
+	//弾が当たったら少しの間無敵になる
+	if (hitFlag_ == true) {
+		invTime_ += Time::DeltaTime();
+		if (invTime_ >= FINV_TIME) {
+			hitFlag_ = false;
+			invTime_ = 0;
+		}
 	}
 }
 

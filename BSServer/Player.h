@@ -29,4 +29,6 @@ private:
 	int fImage_;
 	int Life_;
 	bool isPush_;//’e‚ð‰Ÿ‚µ‚½‚©
+	bool hitFlag_;//“–‚½‚Á‚½‚©
+	float invTime_;//–³“GŽžŠÔ
 };
