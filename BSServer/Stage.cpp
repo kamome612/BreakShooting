@@ -16,7 +16,7 @@ void Stage::Initialize()
 void Stage::Update()
 {
 	Cr = GetColor(255, 0, 0);
-
+	Bcr = GetColor(255, 255, 255);
 }
 
 void Stage::Draw()
@@ -32,18 +32,9 @@ void Stage::Draw()
 	//↓ステージを分断する破壊できる壁
 	for (int i = 0; i < count; i++)
 	{
-		//for (int j = 0; j < count; j++)
-		//{
-		int xS = xSStart + i * (Linelength + 5);
-		int yS = LineHeight;
-		int xE = xS + Linelength;
-		int yE = LineHeight;
-		DrawLine(xS, yS, xE, yE, GetColor(255, 255, 255));
-		//}
-
+			DrawBoxAA(180 + (60 * i) + 10, 390, 180 + (60 * i) + 61, 410, Bcr, FALSE);
+		
 	}
-	//DrawBox(transform_.position_.x,transform_.position_.y , width_, height_, Cr, FALSE);
-	//DrawOval(640, 360, 550, 350, Cr, FALSE);
 
 }
 
