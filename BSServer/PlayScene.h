@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Bullet.h"
 
 class PlayScene :
 	public GameObject
