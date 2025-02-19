@@ -1,5 +1,6 @@
 #include "PlayScene.h"
 #include "Stage.h"
+
 PlayScene::PlayScene(GameObject* parent)
 	: GameObject(parent,"PlayScene")
 {
