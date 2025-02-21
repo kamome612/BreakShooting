@@ -3,7 +3,7 @@
 
 namespace
 {
-	const float Speed_{ 300.0 };
+	const float Speed_{ 550.0 };
 	const float LimitTime_ = 6.0f;
 
 	const float Lwidth = 100; //¶•Ç
@@ -17,6 +17,7 @@ namespace
 
 Bullet::Bullet(GameObject* parent)
 	:GameObject(parent, "Bullet"), hImage_(-1), BulletTime_(0), angle_(XM_PI / -2.0), moveX(0), moveY(0)
+                                 , isDead_(false)
 {
 
 }
@@ -35,6 +36,7 @@ void Bullet::Update()
 	if (BulletTime_ >= LimitTime_)
 	{
 		KillMe();
+		isDead_;
 	}
 
 	moveX = cos(angle_) * Speed_ * Time::DeltaTime();
@@ -43,7 +45,7 @@ void Bullet::Update()
 	transform_.position_.x += moveX;
 	transform_.position_.y += moveY;
 
-	WallJuge();
+	WallJudge();
 
 }
 
@@ -80,7 +82,7 @@ bool Bullet::CollideCircle(float x, float y, float r)
 	}
 }
 
-void Bullet::WallJuge()
+void Bullet::WallJudge()
 {
 
 	if (transform_.position_.x < Lwidth - posX + MARGIN) {//¶•Ç
@@ -119,4 +121,9 @@ void Bullet::WallJuge()
 	}
 
 
+}
+
+bool Bullet::IsAlive()
+{
+	return !isDead_;
 }
