@@ -77,7 +77,7 @@ void Player::Update()
 	}
 
 	//’e‚Æ‚Ì“–‚½‚è”»’è
-	/*std::list<Bullet *> pBullet = GetParent()->FindGameObjects<Bullet>();
+	std::list<Bullet *> pBullet = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullet) {
 		if (hitFlag_ == false) {
 			if (pBullet->CollideCircle) {
@@ -85,7 +85,7 @@ void Player::Update()
 				hitFlag_ = true;
 			}
 		}
-	}*/
+	}
 
 	//’e‚ª“–‚½‚Á‚½‚ç­‚µ‚ÌŠÔ–³“G‚É‚È‚é
 	if (hitFlag_ == true) {
