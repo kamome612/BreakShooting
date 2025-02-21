@@ -10,6 +10,8 @@ private:
 	int Image_;
 	float width_;
 	float height_;
+	float timer_;
+	int hit;
 public:
 	//引数：parent  親オブジェクト（SceneManager）
 	Stage(GameObject* parent);

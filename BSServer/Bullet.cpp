@@ -1,6 +1,6 @@
 #include "Bullet.h"
 #include"Engine/time.h"
-
+#include "Stage.h"
 namespace
 {
 	const float Speed_{ 550.0 };

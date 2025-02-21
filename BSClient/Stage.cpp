@@ -61,3 +61,4 @@ bool Stage::IsRectIntersectsOtherRect(float x, float y, float w, float h)
 
 	return false;
 }
+
