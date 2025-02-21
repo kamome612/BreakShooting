@@ -10,6 +10,7 @@ public:
     void Initialize() override;
     void WallJuge();
     void SetPosition(float x, float y);
+    bool CollideCircle(float x, float y, float r);
     void Update() override;
     void Draw() override;
 

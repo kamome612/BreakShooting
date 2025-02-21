@@ -22,13 +22,18 @@ public:
 
 	//位置をセット
 	void SetPosition(float _x, float _y);
+
+	//リロード
+	void Reload();
 private:
 	int pImage_;
 	int lImage_;
 	int dImage_;
 	int fImage_;
 	int Life_;
+	int BImage_;
 	bool isPush_;//弾を押したか
-	bool hitFlag_;//当たったか
-	float invTime_;//無敵時間
+	bool reloading_;//リロード中
+	int currentNum_;//現在の弾数
+	float reloadTime_;//現在の時間
 };

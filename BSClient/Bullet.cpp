@@ -4,7 +4,7 @@
 namespace
 {
 	const float Speed_{ 300.0 };
-	const float LimitTime_ = 10.0f;
+	const float LimitTime_ = 6.0f;
 
 	const float Lwidth = 100; //ç∂ï«
 	const float Rwidth = 1200;//âEï«
@@ -62,6 +62,22 @@ void Bullet::SetPosition(float _x, float _y)
 {
 	transform_.position_.x = _x;
 	transform_.position_.y = _y;
+}
+
+bool Bullet::CollideCircle(float x, float y, float r)
+{
+	float myCenterX = transform_.position_.x;
+	float myCenterY = transform_.position_.y;
+	float myR = 12.0f;
+	float dx = myCenterX - x;
+	float dy = myCenterY - y;
+	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Bullet::WallJuge()

@@ -16,15 +16,25 @@ void Stage::Initialize()
 void Stage::Update()
 {
 	Cr = GetColor(255, 0, 0);
-
+	Bcr = GetColor(255, 255, 255);
 }
 
 void Stage::Draw()
 {
+	int Linelength = 60;
+	int LineHeight = 400;
+	int xSStart = 170;
+	int count = 15;
+	int Hcount = 3;
+	//↓ステージの外枠
 	DrawBoxAA(100, 100, 1200, 680, Cr, FALSE);
 	DrawBoxAA(101, 101, 1201, 681, Cr, FALSE);
-	//DrawBox(transform_.position_.x,transform_.position_.y , width_, height_, Cr, FALSE);
-	//DrawOval(640, 360, 550, 350, Cr, FALSE);
+	//↓ステージを分断する破壊できる壁
+	for (int i = 0; i < count; i++)
+	{
+			DrawBoxAA(180 + (60 * i) + 10, 390, 180 + (60 * i) + 61, 410, Bcr, FALSE);
+		
+	}
 
 }
 
