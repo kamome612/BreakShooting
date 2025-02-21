@@ -56,8 +56,6 @@ void PlayScene::Update()
 		printfDx("%d", ret);
 	}
 
-	
-
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
 	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };

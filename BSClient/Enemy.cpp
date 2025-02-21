@@ -6,10 +6,9 @@ namespace {
 	const float SPEED = 150;
 	const XMFLOAT3 INIT_POS = { 320,180,0 };
 }
-
 Enemy::Enemy(GameObject* parent)
-	:GameObject(parent,"Enemy"),pImage_(-1),lImage_(-1),dImage_(-1),
-	                            fImage_(-1),Life_(3)
+	:GameObject(parent, "Enemy"), pImage_(-1), lImage_(-1), dImage_(-1),
+	fImage_(-1), Life_(3)
 {
 }
 
@@ -37,22 +36,22 @@ void Enemy::Draw()
 	int y = (int)transform_.position_.y;
 	DrawGraph(x, y, pImage_, TRUE);
 
-	////ライフの枠
-	//int lenF = -120;//x移動
-	//DrawExtendGraph(lenF, -175, lenF + 510, 245, fImage_, TRUE);
+	// ライフの枠
+	int lenF = 900;  // x移動
+	DrawExtendGraph(lenF, -175, lenF + 510, 245, fImage_, TRUE);
 
-	////ライフとライフの下に黒くしたライフを描画
-	//int lenYff = 95;//ハートフレームだけのx移動
-	//int lenY = 36;   //Y移動
-	//for (int j = 0; j < 3; j++) {
-	//	//DrawGraph((CHIP_SIZE * j) + 40, 30, dImage_, TRUE);
-	//	DrawExtendGraph((CHIP_SIZE * j) + lenYff, lenY, (CHIP_SIZE * j) + lenYff - 60, lenY + 45, dImage_, TRUE);
-	//}
+	//ライフとライフの下に黒くしたライフを描画
+	int lenYff = 1115;//ハートフレームだけのx移動
+	int lenY = 36;   //Y移動
+	for (int j = 0; j < 3; j++) {
+		//DrawGraph((CHIP_SIZE * j) + 40, 30, dImage_, TRUE);
+		DrawExtendGraph((CHIP_SIZE * j) + lenYff, lenY, (CHIP_SIZE * j) + lenYff - 60, lenY + 45, dImage_, TRUE);
+	}
 
-	//for (int i = 0; i < Life_; i++) {
-	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
-	//	DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
-	//}
+	for (int i = 0; i < Life_; i++) {
+		//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
+		DrawExtendGraph((CHIP_SIZE * i) + lenYff + 5, lenY, (CHIP_SIZE * i) + 980, lenY + 45, lImage_, TRUE);
+	}
 
 	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 }

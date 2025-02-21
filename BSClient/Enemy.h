@@ -1,11 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
 class Enemy :
-    public GameObject
+	public GameObject
 {
 public:
-    //コンストラクタ
-    Enemy(GameObject* parent);
+	//コンストラクタ
+	Enemy(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
