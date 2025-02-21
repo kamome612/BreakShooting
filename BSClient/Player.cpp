@@ -7,7 +7,7 @@ std::vector<Bullet*> bullets;
 
 namespace {
 	const float CHIP_SIZE = 64.0f;
-	const float SPEED = 150;
+	const float SPEED = 400;
 	const XMFLOAT3 INIT_POS = { 320,540,0 };//最初の位置
 	const float RWIDTH = 1200; //ステージの右
 	const float LWIDTH = 100; //ステージの左
@@ -21,7 +21,7 @@ namespace {
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1), lImage_(-1), dImage_(-1), BImage_(-1),
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
-	currentNum_(MAX_BULLET)
+	currentNum_(MAX_BULLET),hitFlag_(false)
 {
 }
 
@@ -91,6 +91,18 @@ void Player::Update()
 		}
 	}
 
+	//敵との当たり判定
+	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
+	for (Bullet* pBullet : pBullets) {
+		if (hitFlag_ == false) {
+			if (pBullet->CollideCircle(CHIP_SIZE/2,CHIP_SIZE/2 ,12.0f )) {
+				Life_ -= 1;
+				hitFlag_ = true;
+			}
+		}
+	}
+
+	
 	//リロード
 	//if (CheckHitKey(KEY_INPUT_L) || currentNum_ == 0)
 	//{

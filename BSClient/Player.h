@@ -36,4 +36,5 @@ private:
 	bool reloading_;//ƒŠƒ[ƒh’†
 	int currentNum_;//Œ»İ‚Ì’e”
 	float reloadTime_;//Œ»İ‚ÌŠÔ
+	bool hitFlag_;
 };
