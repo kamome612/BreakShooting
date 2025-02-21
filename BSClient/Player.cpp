@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "Engine/time.h"
 #include "Bullet.h"
+#include <vector>
+
+std::vector<Bullet*> bullets;
 
 namespace {
 	const float CHIP_SIZE = 64.0f;
@@ -12,7 +15,7 @@ namespace {
 	const float MARGIN = 15; //余白
 
 	const int MAX_BULLET = 5;//弾の最大数
-	const float INTERVAL = 3.0f;//リロード時間
+	//const float INTERVAL = 3.0f;//リロード時間
 }
 
 Player::Player(GameObject* parent)
@@ -67,11 +70,12 @@ void Player::Update()
 		}
 	}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) && currentNum_ > 0) {
-		if (!isPush_ && !reloading_) {
+	if (CheckHitKey(KEY_INPUT_SPACE) && bullets.size() < MAX_BULLET) {
+		if (!isPush_) {
 			Bullet* bullet = Instantiate<Bullet>(GetParent());
 			bullet->SetPosition(transform_.position_.x, transform_.position_.y);
-			currentNum_--;
+			bullets.push_back(bullet);
+			//currentNum_--;
 			isPush_ = true;
 		}
 	}
@@ -79,17 +83,25 @@ void Player::Update()
 		isPush_ = false;
 	}
 
-	//リロード
-	if (CheckHitKey(KEY_INPUT_L) || currentNum_ == 0)
+	for (int i = bullets.size() - 1; i >= 0; i--)
 	{
-		if (currentNum_ != MAX_BULLET && reloading_ != true) {
-			reloading_ = true;
+		if (!bullets[i]->IsAlive()) {
+			bullets[i]->KillMe();
+			bullets.erase(bullets.begin() + i);//削除
 		}
 	}
-	//リロード中
-	if (reloading_) {
-		Reload();
-	}
+
+	//リロード
+	//if (CheckHitKey(KEY_INPUT_L) || currentNum_ == 0)
+	//{
+	//	if (currentNum_ != MAX_BULLET && reloading_ != true) {
+	//		reloading_ = true;
+	//	}
+	//}
+	////リロード中
+	//if (reloading_) {
+	//	Reload();
+	//}
 
 }
 
@@ -118,8 +130,8 @@ void Player::Draw()
 
 	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 
-	int lenX = 870;
-	//for (int i = 0; i < currentNum_; i++) {
+	//int lenX = 870;
+	//for (int i = 0; i < bullets.size(); i++) {//弾の確認用
 	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
 	//	DrawGraph((i * 64) + lenX + 65, 10, BImage_, TRUE);
 	//}
@@ -137,13 +149,13 @@ void Player::SetPosition(float _x, float _y)
 	transform_.position_.y = _y;
 }
 
-void Player::Reload()
-{
-	reloadTime_ += Time::DeltaTime();
-	if (reloadTime_ > INTERVAL)
-	{
-		currentNum_ = MAX_BULLET;
-		reloading_ = false;
-		reloadTime_ = 0.0;
-	}
-}
+//void Player::Reload()
+//{
+//	reloadTime_ += Time::DeltaTime();
+//	if (reloadTime_ > INTERVAL)
+//	{
+//		currentNum_ = MAX_BULLET;
+//		reloading_ = false;
+//		reloadTime_ = 0.0;
+//	}
+//}
