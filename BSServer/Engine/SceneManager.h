@@ -7,7 +7,7 @@ enum SCENE_ID
 {
 	SCENE_ID_TEST = 0,
 	SCENE_ID_TITLE,
-	SCENE_ID_EXPLANATION,
+	SCENE_ID_STANDBY,
 	SCENE_ID_PLAY,
 	SCENE_ID_RESULT,
 };
@@ -21,6 +21,7 @@ public:
 	bool clearFlag_;
 	bool keyFlag_;
 	int fps_;
+	int sock_;
 
 	//コンストラクタ
 	//引数：parent	親オブジェクト（基本的にゲームマネージャー）
@@ -40,6 +41,12 @@ public:
 
 	//シーンの切り替え(intも受け取れる)
 	void ChangeScene(SCENE_ID next, bool tmp, int fps);
+
+	//ソケットのゲッター
+	int GetSock() { return sock_; }
+
+	//ソケットのセッター
+	void SetSock(int _sock) { sock_ = _sock; }
 
 private:
 	SCENE_ID currentSceneID_;	//現在のシーン

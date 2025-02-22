@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/SceneManager.h"
 #include "Player.h"
 #include "Enemy.h"
 class PlayScene :
@@ -9,6 +10,7 @@ class PlayScene :
 	Player* pPlayer;
 	Enemy* pEnemy;
 	int sock;
+	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

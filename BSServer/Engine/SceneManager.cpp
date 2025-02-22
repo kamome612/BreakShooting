@@ -1,6 +1,7 @@
 #include "sceneManager.h"
 #include "../TestScene.h"
 #include "../TitleScene.h"
+#include "../StandByScene.h"
 #include "../PlayScene.h"
 #include "../ResultScene.h"
 #include "time.h"
@@ -17,6 +18,7 @@ void SceneManager::Initialize()
 	clearFlag_ = false;
 	keyFlag_ = false;
 	fps_ = 0;
+	sock_ = 0;
 	//タイマーの初期化
 	Time::Init();
 	//最初のシーンを準備
@@ -39,6 +41,7 @@ void SceneManager::Update()
 		{
 		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
 		case SCENE_ID_TITLE: Instantiate<TitleScene>(this); break;
+		case SCENE_ID_STANDBY: Instantiate<StandByScene>(this); break;
 		case SCENE_ID_PLAY: Instantiate<PlayScene>(this); break;
 		case SCENE_ID_RESULT: Instantiate<ResultScene>(this); break;
 		}

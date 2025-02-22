@@ -15,7 +15,7 @@ void PlayScene::Initialize()
 	Stage* pStage = Instantiate<Stage>(this);
 	pPlayer = Instantiate<Player>(GetParent());
 	pEnemy = Instantiate<Enemy>(GetParent());
-	sock = MakeUDPSocket(8888);
+	sock = pSceneManager->GetSock();
 }
 
 void PlayScene::Update()
