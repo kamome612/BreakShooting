@@ -57,6 +57,7 @@ void Bullet::Draw()
 	//DrawGraph(x, y, hImage_, TRUE);
 	DrawRotaGraph(x, y, 1, angle_ - 80.1, hImage_, TRUE);
 
+	DrawCircle(x-1,y, 8.0f, GetColor(0, 0, 255), FALSE);
 }
 
 
@@ -68,9 +69,9 @@ void Bullet::SetPosition(float _x, float _y)
 
 bool Bullet::CollideCircle(float x, float y, float r)
 {
-	float myCenterX = transform_.position_.x;
+	float myCenterX = transform_.position_.x+posX-1;
 	float myCenterY = transform_.position_.y;
-	float myR = 12.0f;
+	float myR = 8.0f;
 	float dx = myCenterX - x;
 	float dy = myCenterY - y;
 	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
