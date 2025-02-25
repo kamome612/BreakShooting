@@ -19,8 +19,8 @@ void StandByScene::Update()
 	IPDATA sendIp;
 	sendIp.d1 = 192;
 	sendIp.d2 = 168;
-	sendIp.d3 = 43;
-	sendIp.d4 = 66;
+	sendIp.d3 = 42;
+	sendIp.d4 = 175;
 	//int recvPort;
 	int s;
 	//int peek = 0;
