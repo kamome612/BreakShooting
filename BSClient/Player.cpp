@@ -13,6 +13,7 @@ namespace {
 	const float LWIDTH = 100; //ステージの左
 	const float HEIGHT = 680; //ステージの高さ
 	const float MARGIN = 15; //余白
+	const float FINV_TIME = 1.0f;//無敵終了時間
 
 	const int MAX_BULLET = 5;//弾の最大数
 	//const float INTERVAL = 3.0f;//リロード時間
@@ -95,13 +96,21 @@ void Player::Update()
 	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullets) {
 		if (hitFlag_ == false) {
-			if (pBullet->CollideCircle(CHIP_SIZE/2,CHIP_SIZE/2 ,12.0f )) {
+			if (pBullet->CollideCircle(x+CHIP_SIZE/2,y+CHIP_SIZE/2 ,20.0f )) {
 				Life_ -= 1;
 				hitFlag_ = true;
 			}
 		}
 	}
 
+	//敵が当たったら少しの間無敵になる
+	if (hitFlag_ == true) {
+		invTime_ += Time::DeltaTime();
+		if (invTime_ >= FINV_TIME) {
+			hitFlag_ = false;
+			invTime_ = 0;
+		}
+	}
 	
 	//リロード
 	//if (CheckHitKey(KEY_INPUT_L) || currentNum_ == 0)
@@ -142,7 +151,7 @@ void Player::Draw()
 
 	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 
-	DrawCircle(x, y,12.0f, GetColor(0, 0, 255), FALSE);
+	DrawCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f, GetColor(0, 0, 255), FALSE);
 	//int lenX = 870;
 	//for (int i = 0; i < bullets.size(); i++) {//弾の確認用
 	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
@@ -164,9 +173,9 @@ void Player::SetPosition(float _x, float _y)
 
 bool Player::CollideCircle(float x, float y, float r)
 {
-	float myCenterX = transform_.position_.x;
-	float myCenterY = transform_.position_.y;
-	float myR = 12.0f;
+	float myCenterX = transform_.position_.x+CHIP_SIZE/2;
+	float myCenterY = transform_.position_.y+CHIP_SIZE/2;
+	float myR = 20.0f;
 	float dx = myCenterX - x;
 	float dy = myCenterY - y;
 	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
