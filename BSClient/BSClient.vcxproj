@@ -77,10 +77,10 @@
     <PublicIncludeDirectories>D:\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230648\プロジェクトに追加すべきファイル_VC用;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicIncludeDirectories>D:\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230648\プロジェクトに追加すべきファイル_VC用;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>D:\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230648\プロジェクトに追加すべきファイル_VC用;D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <PublicIncludeDirectories>D:\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230648\プロジェクトに追加すべきファイル_VC用;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>D:\DxLib_VC\DxLib_VC\プロジェクトに追加すべきファイル_VC用;D:\230648\プロジェクトに追加すべきファイル_VC用;D:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

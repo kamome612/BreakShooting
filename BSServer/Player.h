@@ -25,6 +25,8 @@ public:
 
 	//ƒŠƒ[ƒh
 	void Reload();
+
+	bool CollideCircle(float x, float y, float r);
 private:
 	int pImage_;
 	int lImage_;
