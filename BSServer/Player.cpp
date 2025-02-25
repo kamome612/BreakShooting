@@ -141,6 +141,7 @@ void Player::Draw()
 
 	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 
+	DrawCircle(x, y, 12.0f, GetColor(0, 0, 255), FALSE);
 	//int lenX = 870;
 	//for (int i = 0; i < bullets.size(); i++) {//弾の確認用
 	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
