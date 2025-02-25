@@ -25,6 +25,8 @@ public:
 
 	//ƒŠƒ[ƒh
 	void Reload();
+	
+	bool CollideCircle(float x, float y, float r);
 private:
 	int pImage_;
 	int lImage_;
@@ -37,4 +39,5 @@ private:
 	int currentNum_;//Œ»İ‚Ì’e”
 	float reloadTime_;//Œ»İ‚ÌŠÔ
 	bool hitFlag_;
+	
 };

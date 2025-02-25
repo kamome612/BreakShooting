@@ -142,6 +142,7 @@ void Player::Draw()
 
 	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 
+	DrawCircle(x, y, GetColor(255, 255, 255), FALSE);
 	//int lenX = 870;
 	//for (int i = 0; i < bullets.size(); i++) {//弾の確認用
 	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
@@ -159,6 +160,22 @@ void Player::SetPosition(float _x, float _y)
 {
 	transform_.position_.x = _x;
 	transform_.position_.y = _y;
+}
+
+bool Player::CollideCircle(float x, float y, float r)
+{
+	float myCenterX = transform_.position_.x;
+	float myCenterY = transform_.position_.y;
+	float myR = 12.0f;
+	float dx = myCenterX - x;
+	float dy = myCenterY - y;
+	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //void Player::Reload()
