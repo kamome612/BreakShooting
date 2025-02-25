@@ -19,9 +19,12 @@ void Stage::Initialize()
 
 	for (int i = 0; i < 15; i++)
 	{
-		Block* pBlock = Instantiate<Block>(GetParent());
-		pBlock->SetPosition({ (float)180 + (60 * i) + 10,(float)390,(float)0 });
-		hBlock.push_back(pBlock);
+		for (int j = 0; j < 3; j++)
+		{
+			Block* pBlock = Instantiate<Block>(GetParent());
+			pBlock->SetPosition({ (float)180 + (60 * i) + 10,(float)390 + (120 * j) + 10,(float)0 });
+			hBlock.push_back(pBlock);
+		}
 	}
 }
 
