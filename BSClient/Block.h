@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+
 class Block :
 	public GameObject
 {
@@ -21,4 +22,6 @@ public:
 
 	//ŠJ•ú
 	void Release() override;
+
+	bool BulletCollistion(float bx, float by, float br);
 };

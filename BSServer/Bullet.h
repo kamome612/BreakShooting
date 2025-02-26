@@ -9,6 +9,7 @@ public:
 
     void Initialize() override;
     void WallJudge();
+    void BlockJudge();
     bool IsAlive();
     void SetPosition(float x, float y);
     bool CollideCircle(float x, float y, float r);

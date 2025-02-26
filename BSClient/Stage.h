@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Block.h"
+#include<vector>
+
 class Stage :
     public GameObject
 {
@@ -27,6 +30,8 @@ public:
 	void Release() override;
 
 	bool IsRectIntersectsOtherRect(float x, float y, float w, float h);
+
+	static std::vector<Block*> hBlock;
 
 };
 
