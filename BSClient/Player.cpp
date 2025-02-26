@@ -92,7 +92,7 @@ void Player::Update()
 		}
 	}
 
-	//“G‚Æ‚Ì“–‚½‚è”»’è
+	//’e‚Æ‚Ì“–‚½‚è”»’è
 	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullets) {
 		if (hitFlag_ == false) {
@@ -103,7 +103,7 @@ void Player::Update()
 		}
 	}
 
-	//“G‚ª“–‚½‚Á‚½‚ç­‚µ‚ÌŠÔ–³“G‚É‚È‚é
+	//’e‚ª“–‚½‚Á‚½‚ç­‚µ‚ÌŠÔ–³“G‚É‚È‚é
 	if (hitFlag_ == true) {
 		invTime_ += Time::DeltaTime();
 		if (invTime_ >= FINV_TIME) {
