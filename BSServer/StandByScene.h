@@ -6,6 +6,7 @@ class StandByScene :
 private:
 	int sPict_;
 	int sock_;
+	IPDATA recvIp_;
 public:
 	//コンストラクタ
 	StandByScene(GameObject* parent);

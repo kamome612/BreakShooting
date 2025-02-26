@@ -22,6 +22,7 @@ public:
 	bool keyFlag_;
 	int fps_;
 	int sock_;
+	IPDATA ip_;
 
 	//コンストラクタ
 	//引数：parent	親オブジェクト（基本的にゲームマネージャー）
@@ -47,6 +48,12 @@ public:
 
 	//ソケットのセッター
 	void SetSock(int _sock) { sock_ = _sock; }
+
+	//IPアドレスのゲッター
+	IPDATA GetIP() { return ip_; }
+
+	//IPアドレスのセッター
+	void SetIP(IPDATA _ip) { ip_ = _ip; }
 
 private:
 	SCENE_ID currentSceneID_;	//現在のシーン

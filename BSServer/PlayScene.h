@@ -13,6 +13,7 @@ private:
 	Player* pPlayer;
 	Enemy* pEnemy;
 	int sock;
+	IPDATA recvIp;
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 public:
 	//コンストラクタ

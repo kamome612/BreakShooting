@@ -14,6 +14,7 @@ void PlayScene::Initialize()
 	pPlayer = Instantiate<Player>(GetParent());
 	pEnemy = Instantiate<Enemy>(GetParent());
 	sock = pSceneManager->GetSock();
+	sendIp = pSceneManager->GetIP();
 }
 
 void PlayScene::Update()
@@ -22,18 +23,6 @@ void PlayScene::Update()
 	pPlayer->RecvData();
 	pPlayer->SendData();
 	ePlayer->RecvData();*/
-
-	IPDATA sendIp;
-	sendIp.d1 = 192;
-	sendIp.d2 = 168;
-	sendIp.d3 = 42;
-	sendIp.d4 = 175;
-
-	//自分で実行する場合
-	/*sendIp.d1 = 172;
-	sendIp.d2 = 0;
-	sendIp.d3 = 0;
-	sendIp.d4 = 1;*/
 
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
@@ -59,6 +48,32 @@ void PlayScene::Update()
 		u_long scaledZ = ntohl(recvPos.z);
 		ePos = { (float)scaledX,(float)scaledY,(float)scaledZ };*/
 		pEnemy->SetPosition(ePos);
+	}
+	else if (ret == -1 || ret == -2 || ret == -3)
+	{
+		// 受信失敗のエラー処理
+		printfDx("%d", ret);
+	}
+
+	XMFLOAT4 bulletData_ = { 0,0,0,0 };
+	if (CheckNetWorkRecvUDP(sock)) {
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+	}
+	if (ret > 0)
+	{
+		Bullet* pBullet = Instantiate<Bullet>(GetParent());
+		XMFLOAT3 bulletPos = pBullet->GetPosition();
+		float angle = 0.0;
+		float time = 0.0;
+		//バイトオーダー変換
+		bulletPos.x = (float)ntohl(bulletData_.x);
+		bulletPos.y = (float)ntohl(bulletData_.y);
+		angle = (float)ntohl(bulletData_.z);
+		time = (float)ntohl(bulletData_.x);
+
+		pBullet->SetPosition(bulletPos.x, bulletPos.y);
+		pBullet->SetAngle(-angle);
+		pBullet->SetBulletTime(time);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{

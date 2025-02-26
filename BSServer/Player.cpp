@@ -24,6 +24,8 @@ Player::Player(GameObject* parent)
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
 	currentNum_(MAX_BULLET),hitFlag_(false)
 {
+	sock_ = pSceneManager->GetSock();
+	ip_ = pSceneManager->GetIP();
 }
 
 void Player::Initialize()
@@ -78,6 +80,13 @@ void Player::Update()
 			bullets.push_back(bullet);
 			//currentNum_--;
 			isPush_ = true;
+
+			//‘—M
+			XMFLOAT3 bPos = bullet->GetPosition();
+			float angle = bullet->GetAngle();
+			float time = bullet->GetBulletTime();
+			long sendData[4] = { htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
 	else {

@@ -16,23 +16,23 @@ void StandByScene::Initialize()
 void StandByScene::Update()
 {
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	IPDATA sendIp;
-	sendIp.d1 = 192;
-	sendIp.d2 = 168;
-	sendIp.d3 = 42;
-	sendIp.d4 = 175;
+	sendIp_.d1 = 192;
+	sendIp_.d2 = 168;
+	sendIp_.d3 = 42;
+	sendIp_.d4 = 175;
 	//int recvPort;
 	int s;
 	//int peek = 0;
 	if (CheckHitKey(KEY_INPUT_P)) {
 	}
-	int ret = NetWorkSendUDP(sock_, sendIp, 8888, &s, sizeof(s));
+	int ret = NetWorkSendUDP(sock_, sendIp_, 8888, &s, sizeof(s));
 
 	bool judg = true;
 	if (CheckNetWorkRecvUDP(sock_)) {
 		//NetWorkRecvUDP(sock_, &sendIp, &recvPort, &s, sizeof(s), peek);
-		pSceneManager->ChangeScene(SCENE_ID_PLAY);
 		pSceneManager->SetSock(sock_);
+		pSceneManager->SetIP(sendIp_);
+		pSceneManager->ChangeScene(SCENE_ID_PLAY);
 	}
 }
 
