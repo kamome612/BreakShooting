@@ -67,6 +67,7 @@ void PlayScene::Update()
 	BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+		int type = (int)ntohl(bulletData_.type);
 	}
 	if (ret > 0 && bulletData_.type == 6)
 	{

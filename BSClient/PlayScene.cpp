@@ -32,17 +32,19 @@ void PlayScene::Update()
     
 	int recvPort;
 	int peek = 0;
+	int type;
 	XMFLOAT3 ePos = pEnemy->GetPosition();
-	long recvPos[3] = { 0,0,0 };
+	long recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvPos, sizeof(recvPos), peek);
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvPos), peek);
+		//type = (int)ntohl(recvData[0]);
 	}
 	if (ret > 0)
 	{
 		//バイトオーダー変換
-		ePos.x = (float)ntohl(recvPos[0]);
-		ePos.y = (float)ntohl(recvPos[1]);
-		ePos.z = (float)ntohl(recvPos[2]);
+		ePos.x = (float)ntohl(recvData[1]);
+		ePos.y = (float)ntohl(recvData[2]);
+		ePos.z = (float)ntohl(recvData[3]);
 		/*u_long scaledX = ntohl(recvPos.x);
 		u_long scaledY = ntohl(recvPos.y);
 		u_long scaledZ = ntohl(recvPos.z);
@@ -67,6 +69,7 @@ void PlayScene::Update()
 	BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+		int type = (int)ntohl(bulletData_.type);
 	}
 	if (ret > 0 && bulletData_.type == 6)
 	{
