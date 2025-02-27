@@ -14,6 +14,7 @@ void PlayScene::Initialize()
 	pPlayer = Instantiate<Player>(GetParent());
 	pEnemy = Instantiate<Enemy>(GetParent());
 	sock = pSceneManager->GetSock();
+	sendIp = pSceneManager->GetIP();
 }
 
 void PlayScene::Update()
@@ -23,18 +24,6 @@ void PlayScene::Update()
 	pPlayer->SendData();
 	ePlayer->RecvData();*/
 
-	IPDATA sendIp;
-	sendIp.d1 = 192;
-	sendIp.d2 = 168;
-	sendIp.d3 = 42;
-	sendIp.d4 = 175;
-
-	//自分で実行する場合
-	/*sendIp.d1 = 172;
-	sendIp.d2 = 0;
-	sendIp.d3 = 0;
-	sendIp.d4 = 1;*/
-
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
 	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
@@ -43,22 +32,61 @@ void PlayScene::Update()
     
 	int recvPort;
 	int peek = 0;
+	int type;
 	XMFLOAT3 ePos = pEnemy->GetPosition();
-	long recvPos[3] = { 0,0,0 };
+	long recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvPos, sizeof(recvPos), peek);
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvData), peek);
+		//type = (int)ntohl(recvData[0]);
 	}
 	if (ret > 0)
 	{
 		//バイトオーダー変換
-		ePos.x = (float)ntohl(recvPos[0]);
-		ePos.y = (float)ntohl(recvPos[1]);
-		ePos.z = (float)ntohl(recvPos[2]);
+		ePos.x = (float)ntohl(recvData[0]);
+		ePos.y = (float)ntohl(recvData[1]);
+		ePos.z = (float)ntohl(recvData[2]);
 		/*u_long scaledX = ntohl(recvPos.x);
 		u_long scaledY = ntohl(recvPos.y);
 		u_long scaledZ = ntohl(recvPos.z);
 		ePos = { (float)scaledX,(float)scaledY,(float)scaledZ };*/
 		pEnemy->SetPosition(ePos);
+	}
+	else if (ret == -1 || ret == -2 || ret == -3)
+	{
+		// 受信失敗のエラー処理
+		printfDx("%d", ret);
+	}
+
+	struct BulletData
+	{
+		int type;
+		float x;
+		float y;
+		float angle;
+		float time;
+	};
+
+	int bType = 0;
+	BulletData bulletData_ = { 0,0,0,0,0 };
+	if (CheckNetWorkRecvUDP(sock)) {
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+		bType = (int)ntohl(bulletData_.type);
+	}
+	if (ret > 0 && bType == 6)
+	{
+		Bullet* pBullet = Instantiate<Bullet>(GetParent());
+		XMFLOAT3 bulletPos = pBullet->GetPosition();
+		float angle = 0.0;
+		float time = 0.0;
+		//バイトオーダー変換
+		bulletPos.x = (float)ntohl(bulletData_.x);
+		bulletPos.y = (float)ntohl(bulletData_.y);
+		angle = (float)ntohl(bulletData_.angle);
+		time = (float)ntohl(bulletData_.time);
+
+		pBullet->SetPosition(bulletPos.x, bulletPos.y);
+		pBullet->SetAngle(-angle);
+		pBullet->SetBulletTime(time);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{

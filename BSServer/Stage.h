@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Block.h"
+#include <vector>
+
 class Stage :
 	public GameObject
 {
@@ -30,5 +33,7 @@ public:
 
 	//bool CollideCircle(float x, float y, float r);
 	bool IsRectIntersectsOtherRect(float x, float y, float w,float h);
+
+	static std::vector<Block*> hBlock;
 
 };

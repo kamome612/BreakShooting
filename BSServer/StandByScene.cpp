@@ -16,11 +16,10 @@ void StandByScene::Initialize()
 void StandByScene::Update()
 {
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	IPDATA recvIp;
-	recvIp.d1 = 172;
-	recvIp.d2 = 0;
-	recvIp.d3 = 0;
-	recvIp.d4 = 1;
+	recvIp_.d1 = 172;
+	recvIp_.d2 = 0;
+	recvIp_.d3 = 0;
+	recvIp_.d4 = 1;
 	int peek = 0;
 	int recvPort;
 	//long s;
@@ -30,14 +29,15 @@ void StandByScene::Update()
 		connectOK = CheckNetWorkRecvUDP(sock_);
 	}
 	if (CheckNetWorkRecvUDP(sock_)) {
-		NetWorkRecvUDP(sock_, &recvIp, &recvPort, &s, sizeof(s), peek);
+		NetWorkRecvUDP(sock_, &recvIp_, &recvPort, &s, sizeof(s), peek);
 		/*int ret = NetWorkSendUDP(sock_, recvIp, 8888, &s, sizeof(s));
 		pSceneManager->SetSock(sock_);
 		pSceneManager->ChangeScene(SCENE_ID_PLAY);*/
 	}
 	if (connectOK && CheckHitKey(KEY_INPUT_P)) {
-		NetWorkSendUDP(sock_, recvIp, 8888, &s, sizeof(s));
+		NetWorkSendUDP(sock_, recvIp_, 8888, &s, sizeof(s));
 		pSceneManager->SetSock(sock_);
+		pSceneManager->SetIP(recvIp_);
 		pSceneManager->ChangeScene(SCENE_ID_PLAY);
 	}
 }

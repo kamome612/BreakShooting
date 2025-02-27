@@ -3,7 +3,10 @@
 #include "Bullet.h"
 #include "Block.h"
 #include <vector>
-std::vector<Block*> hBlock;
+
+//ëºÇ…éQè∆ÇÃÇΩÇﬂ
+std::vector<Block*> Stage::hBlock;
+
 Stage::Stage(GameObject* parent)
 	: GameObject(parent, "Stage")
 {

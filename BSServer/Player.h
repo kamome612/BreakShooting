@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/SceneManager.h"
 
 class Player : public GameObject
 {
@@ -40,4 +41,7 @@ private:
 	float reloadTime_;//Œ»İ‚ÌŠÔ
 	float invTime_; //–³“GŠÔ
 	bool hitFlag_;
+	int sock_;
+	IPDATA ip_;
+	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 };

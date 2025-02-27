@@ -3,6 +3,7 @@
 #include "Engine/SceneManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Bullet.h"
 class PlayScene :
     public GameObject
 {
@@ -10,6 +11,7 @@ class PlayScene :
 	Player* pPlayer;
 	Enemy* pEnemy;
 	int sock;
+	IPDATA sendIp;
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 public:
 	//コンストラクタ

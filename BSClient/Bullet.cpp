@@ -1,10 +1,13 @@
 #include "Bullet.h"
 #include"Engine/time.h"
+#include "Stage.h"
+#include "Block.h"
+
 
 namespace
 {
 	const float Speed_{ 550.0 };
-	const float LimitTime_ = 6.0f;
+	const float LimitTime_ = 4.0f;
 
 	const float Lwidth = 100; //左壁
 	const float Rwidth = 1200;//右壁
@@ -12,6 +15,7 @@ namespace
 	const float low = 680; //地面
 	const float MARGIN = 15; //余白
 
+	float myR = 8.0f;
 	const float posX = 30;//x座標の修正
 }
 
@@ -46,6 +50,7 @@ void Bullet::Update()
 	transform_.position_.y += moveY;
 
 	WallJudge();
+	BlockJudge();
 
 }
 
@@ -71,7 +76,7 @@ bool Bullet::CollideCircle(float x, float y, float r)
 {
 	float myCenterX = transform_.position_.x+posX-1;
 	float myCenterY = transform_.position_.y;
-	float myR = 8.0f;
+
 	float dx = myCenterX - x;
 	float dy = myCenterY - y;
 	if ((dx * dx + dy * dy) < ((r + myR) * (r + myR))) {
@@ -122,6 +127,49 @@ void Bullet::WallJudge()
 	}
 
 
+}
+
+void Bullet::BlockJudge()
+{
+	if (Stage::hBlock.empty()) {
+		return;//ブロックがない場合 何もしない
+	}
+
+	std::vector<Block*>dBlocks;//削除用
+
+	for (auto& blocks : Stage::hBlock)
+	{
+		if (blocks == nullptr) {
+			continue;
+		}
+		if (blocks->BulletCollistion(transform_.position_.x, transform_.position_.y, myR))
+		{
+			dBlocks.push_back(blocks);
+
+			if (angle_ == (XM_PI / -2.0f)) {
+				if (rand() % 2 == 0) {
+					angle_ = 3.0f * XM_PI / 4.0f; //左
+				}
+				else {
+					angle_ = -XM_PI / 4.0f;
+				}
+			}
+			else {
+				angle_ = -angle_;
+			}
+		}
+	}
+
+	for (auto& blocks : dBlocks) {
+		blocks->KillMe();
+
+		//要素さがし
+		std::vector<Block*>::iterator it = std::find(Stage::hBlock.begin(), Stage::hBlock.end(), blocks);
+		if (it != Stage::hBlock.end())
+		{
+			Stage::hBlock.erase(it); // 削除
+		}
+	}
 }
 
 bool Bullet::IsAlive()

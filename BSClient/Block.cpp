@@ -24,3 +24,36 @@ void Block::Draw()
 void Block::Release()
 {
 }
+
+bool Block::BulletCollistion(float bx, float by, float br)
+{
+	float x = transform_.position_.x - 30;
+	float y = transform_.position_.y;
+
+	float nearX, nearY;
+
+	// ‰~‚Ì“–‚½‚è”»’è
+	if (bx < x) {
+		nearX = x;
+	}
+	else if (bx > x + width_) {
+		nearX = x + width_;
+	}
+	else {
+		nearX = bx;
+	}
+
+	if (by < y) {
+		nearY = y;
+	}
+	else if (by > y + height_) {
+		nearY = y + height_;
+	}
+	else {
+		nearY = by;
+	}
+
+	float dx = bx - nearX;
+	float dy = by - nearY;
+	return (dx * dx + dy * dy) <= (br * br);
+}
