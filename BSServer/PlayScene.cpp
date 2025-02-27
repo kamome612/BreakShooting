@@ -1,8 +1,10 @@
 #include "PlayScene.h"
 #include "Stage.h"
+#include "Engine/time.h"
+#include <string>
 
 PlayScene::PlayScene(GameObject* parent)
-	: GameObject(parent,"PlayScene")
+	: GameObject(parent,"PlayScene"),fpsTimer_(0.0f),fpsCount_(0),fps_(0)
 {
 }
 
@@ -19,6 +21,14 @@ void PlayScene::Initialize()
 
 void PlayScene::Update()
 {
+	//fpsŠm”F—p
+	if (fpsTimer_ >= 1.0f) {
+		fpsTimer_ = 0.0f;
+		fps_ = fpsCount_;
+		fpsCount_ = 0;
+	}
+	fpsTimer_ += Time::DeltaTime();
+	fpsCount_++;
 
 	/*ePlayer->SendData();
 	pPlayer->RecvData();
@@ -105,6 +115,9 @@ void PlayScene::Update()
 void PlayScene::Draw()
 {
 	DrawGraph(0, 0, Image_, TRUE);
+	std::string s = std::to_string(fps_);
+	int Cr = GetColor(255, 255, 255);
+	DrawString(620, 0, s.c_str(), Cr);
 }
 
 void PlayScene::Release()

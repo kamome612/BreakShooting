@@ -13,6 +13,11 @@ class PlayScene :
 	int sock;
 	IPDATA sendIp;
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+    
+	//ちょいfps確認用
+	int fpsCount_;
+	float fpsTimer_;
+	int fps_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
