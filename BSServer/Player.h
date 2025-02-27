@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
+#include <vector>
 
 class Player : public GameObject
 {
@@ -27,8 +28,15 @@ public:
 	//ÉäÉçÅ[Éh
 	void Reload();
 
+	//BulletsÇ…í«â¡
+	void SetBullets(Bullet* b)
+	{
+		bullets.push_back(b);
+	}
+
 	bool CollideCircle(float x, float y, float r);
 private:
+	std::vector<Bullet*> bullets;
 	int pImage_;
 	int lImage_;
 	int dImage_;

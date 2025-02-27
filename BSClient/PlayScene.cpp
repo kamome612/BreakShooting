@@ -57,36 +57,44 @@ void PlayScene::Update()
 		printfDx("%d", ret);
 	}
 
-	struct BulletData
+	/*struct BulletData
 	{
 		int type;
 		float x;
 		float y;
 		float angle;
 		float time;
-	};
+	};*/
 
 	int bType = 0;
-	BulletData bulletData_ = { 0,0,0,0,0 };
+	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
-		bType = (int)ntohl(bulletData_.type);
+		//ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bType, sizeof(bType), peek);
+		bType = (int)ntohl(bType);
 	}
 	if (ret > 0 && bType == 6)
 	{
+		Player* pPlayer = (Player*)FindObject("Player");
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
-		XMFLOAT3 bulletPos = pBullet->GetPosition();
-		float angle = 0.0;
-		float time = 0.0;
-		//バイトオーダー変換
-		bulletPos.x = (float)ntohl(bulletData_.x);
-		bulletPos.y = (float)ntohl(bulletData_.y);
-		angle = (float)ntohl(bulletData_.angle);
-		time = (float)ntohl(bulletData_.time);
+		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
+		XMFLOAT3 bPos = pEnemy->GetPosition();
+		pBullet->SetPosition(bPos.x, bPos.y);
+		pBullet->SetAngle(-90);
+		pPlayer->SetBullets(pBullet);
+		
+		//XMFLOAT3 bulletPos = pBullet->GetPosition();
+		//float angle = 0.0;
+		//float time = 0.0;
+		////バイトオーダー変換
+		//bulletPos.x = (float)ntohl(bulletData_.x);
+		//bulletPos.y = (float)ntohl(bulletData_.y);
+		//angle = (float)ntohl(bulletData_.angle);
+		//time = (float)ntohl(bulletData_.time);
 
-		pBullet->SetPosition(bulletPos.x, bulletPos.y);
-		pBullet->SetAngle(-angle);
-		pBullet->SetBulletTime(time);
+		//pBullet->SetPosition(bulletPos.x, bulletPos.y);
+		//pBullet->SetAngle(-angle);
+		//pBullet->SetBulletTime(time);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{

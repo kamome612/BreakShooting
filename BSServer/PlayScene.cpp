@@ -73,19 +73,26 @@ void PlayScene::Update()
 	}
 	if (ret > 0 && bType == 6)
 	{
+		Player* pPlayer = (Player*)FindObject("Player");
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
-		XMFLOAT3 bulletPos = pBullet->GetPosition();
-		float angle = 0.0;
-		float time = 0.0;
-		//バイトオーダー変換
-		bulletPos.x = (float)ntohl(bulletData_.x);
-		bulletPos.y = (float)ntohl(bulletData_.y);
-		angle = (float)ntohl(bulletData_.angle);
-		time = (float)ntohl(bulletData_.time);
+		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
+		XMFLOAT3 bPos = pEnemy->GetPosition();
+		pBullet->SetPosition(bPos.x, bPos.y);
+		pBullet->SetAngle(-90);
+		pPlayer->SetBullets(pBullet);
 
-		pBullet->SetPosition(bulletPos.x, bulletPos.y);
-		pBullet->SetAngle(-angle);
-		pBullet->SetBulletTime(time);
+		//XMFLOAT3 bulletPos = pBullet->GetPosition();
+		//float angle = 0.0;
+		//float time = 0.0;
+		////バイトオーダー変換
+		//bulletPos.x = (float)ntohl(bulletData_.x);
+		//bulletPos.y = (float)ntohl(bulletData_.y);
+		//angle = (float)ntohl(bulletData_.angle);
+		//time = (float)ntohl(bulletData_.time);
+
+		//pBullet->SetPosition(bulletPos.x, bulletPos.y);
+		//pBullet->SetAngle(-angle);
+		//pBullet->SetBulletTime(time);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{

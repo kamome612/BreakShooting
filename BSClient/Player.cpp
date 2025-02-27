@@ -3,8 +3,6 @@
 #include "Bullet.h"
 #include <vector>
 
-std::vector<Bullet*> bullets;
-
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 400;
@@ -83,10 +81,11 @@ void Player::Update()
 
 			//‘—M
 			int type = 6;
-			XMFLOAT3 bPos = bullet->GetPosition();
+			/*XMFLOAT3 bPos = bullet->GetPosition();
 			float angle = -(bullet->GetAngle());
 			float time = bullet->GetBulletTime();
-			long sendData[5] = { htonl(type), htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			long sendData[5] = { htonl(type), htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };*/
+			long sendData[1] = { htonl(type) };
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}

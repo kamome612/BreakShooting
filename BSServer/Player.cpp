@@ -1,9 +1,6 @@
 #include "Player.h"
 #include "Engine/time.h"
 #include "Bullet.h"
-#include <vector>
-
-std::vector<Bullet*> bullets;
 
 namespace {
 	const float CHIP_SIZE = 64.0f;
@@ -82,11 +79,14 @@ void Player::Update()
 			isPush_ = true;
 
 			//‘—M
-			int type = 6;
+			//Enemy* enemy = (Enemy*)FindObject("Enemy");
+			/*XMFLOAT3 bPos = enemy->GetPosition();
 			XMFLOAT3 bPos = bullet->GetPosition();
 			float angle = -(bullet->GetAngle());
-			float time = bullet->GetBulletTime();
-			long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			float time = bullet->GetBulletTime();*/
+			int type = 6;
+			//long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			long sendData[1] = { htonl(type) };
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
