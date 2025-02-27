@@ -55,11 +55,20 @@ void PlayScene::Update()
 		printfDx("%d", ret);
 	}
 
-	XMFLOAT4 bulletData_ = { 0,0,0,0 };
+	struct BulletData
+	{
+		int type;
+		float x;
+		float y;
+		float angle;
+		float time;
+	};
+
+	BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
 	}
-	if (ret > 0)
+	if (ret > 0 && bulletData_.type == 6)
 	{
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		XMFLOAT3 bulletPos = pBullet->GetPosition();
@@ -68,8 +77,8 @@ void PlayScene::Update()
 		//バイトオーダー変換
 		bulletPos.x = (float)ntohl(bulletData_.x);
 		bulletPos.y = (float)ntohl(bulletData_.y);
-		angle = (float)ntohl(bulletData_.z);
-		time = (float)ntohl(bulletData_.x);
+		angle = (float)ntohl(bulletData_.angle);
+		time = (float)ntohl(bulletData_.time);
 
 		pBullet->SetPosition(bulletPos.x, bulletPos.y);
 		pBullet->SetAngle(-angle);
