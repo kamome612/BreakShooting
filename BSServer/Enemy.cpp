@@ -1,14 +1,17 @@
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Engine/time.h"
+#include "Engine/SceneManager.h"
 
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
 	const XMFLOAT3 INIT_POS = { 320,180,0 };
+	const float FINV_TIME = 1.0f;//ñ≥ìGèIóπéûä‘
 }
 Enemy::Enemy(GameObject* parent)
 	:GameObject(parent,"Enemy"),pImage_(-1),lImage_(-1),dImage_(-1),
-	                            fImage_(-1),Life_(3)
+	                            fImage_(-1),Life_(3),invTime_(0.0f),hitFlag_(false)
 {
 }
 
@@ -28,6 +31,33 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+	float x = transform_.position_.x;
+	float y = transform_.position_.y;
+
+	//íeÇ∆ÇÃìñÇΩÇËîªíË
+	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
+	for (Bullet* pBullet : pBullets) {
+		if (hitFlag_ == false) {
+			if (pBullet->CollideCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f)) {
+				Life_ -= 1;
+				hitFlag_ = true;
+			}
+		}
+	}
+
+	//íeÇ™ìñÇΩÇ¡ÇΩÇÁè≠ÇµÇÃä‘ñ≥ìGÇ…Ç»ÇÈ
+	if (hitFlag_ == true) {
+		invTime_ += Time::DeltaTime();
+		if (invTime_ >= FINV_TIME) {
+			hitFlag_ = false;
+			invTime_ = 0;
+		}
+	}
+
+	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManger");
+	if (Life_ <= 0) {
+		scenemanager->winFlag_ = true;
+	}
 }
 
 void Enemy::Draw()

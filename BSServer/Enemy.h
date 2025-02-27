@@ -25,5 +25,7 @@ private:
 	int dImage_;
 	int fImage_;
 	int Life_;
+	float invTime_; //–³“GŽžŠÔ
+	bool hitFlag_;
 };
 

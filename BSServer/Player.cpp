@@ -21,7 +21,7 @@ namespace {
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1), lImage_(-1), dImage_(-1), BImage_(-1),
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
-	currentNum_(MAX_BULLET),hitFlag_(false)
+	currentNum_(MAX_BULLET),hitFlag_(false),invTime_(0.0f)
 {
 	sock_ = pSceneManager->GetSock();
 	ip_ = pSceneManager->GetIP();

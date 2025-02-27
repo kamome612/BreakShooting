@@ -18,7 +18,7 @@ enum SCENE_ID
 class SceneManager : public GameObject
 {
 public:
-	bool clearFlag_;
+	bool winFlag_;
 	bool keyFlag_;
 	int fps_;
 	int sock_;
