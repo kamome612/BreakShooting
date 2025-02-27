@@ -55,11 +55,23 @@ void PlayScene::Update()
 	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
 	ret = NetWorkSendUDP(sock, recvIp, 8888, &sendPos, sizeof(sendPos));
 
-	XMFLOAT4 bulletData_ = { 0,0,0,0 };
+	struct BulletData
+	{
+		int type;
+		float x;
+		float y;
+		float angle;
+		float time;
+	};
+
+	int bType = 0;
+
+	BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+		bType = (int)ntohl(bulletData_.type);
 	}
-	if (ret > 0)
+	if (ret > 0 && bType == 6)
 	{
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		XMFLOAT3 bulletPos = pBullet->GetPosition();
@@ -68,8 +80,8 @@ void PlayScene::Update()
 		//バイトオーダー変換
 		bulletPos.x = (float)ntohl(bulletData_.x);
 		bulletPos.y = (float)ntohl(bulletData_.y);
-		angle = (float)ntohl(bulletData_.z);
-		time = (float)ntohl(bulletData_.x);
+		angle = (float)ntohl(bulletData_.angle);
+		time = (float)ntohl(bulletData_.time);
 
 		pBullet->SetPosition(bulletPos.x, bulletPos.y);
 		pBullet->SetAngle(-angle);

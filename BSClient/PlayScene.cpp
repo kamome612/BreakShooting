@@ -32,17 +32,19 @@ void PlayScene::Update()
     
 	int recvPort;
 	int peek = 0;
+	int type;
 	XMFLOAT3 ePos = pEnemy->GetPosition();
-	long recvPos[3] = { 0,0,0 };
+	long recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvPos, sizeof(recvPos), peek);
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvData), peek);
+		//type = (int)ntohl(recvData[0]);
 	}
 	if (ret > 0)
 	{
 		//バイトオーダー変換
-		ePos.x = (float)ntohl(recvPos[0]);
-		ePos.y = (float)ntohl(recvPos[1]);
-		ePos.z = (float)ntohl(recvPos[2]);
+		ePos.x = (float)ntohl(recvData[0]);
+		ePos.y = (float)ntohl(recvData[1]);
+		ePos.z = (float)ntohl(recvData[2]);
 		/*u_long scaledX = ntohl(recvPos.x);
 		u_long scaledY = ntohl(recvPos.y);
 		u_long scaledZ = ntohl(recvPos.z);
@@ -55,11 +57,22 @@ void PlayScene::Update()
 		printfDx("%d", ret);
 	}
 
-	XMFLOAT4 bulletData_ = { 0,0,0,0 };
+	struct BulletData
+	{
+		int type;
+		float x;
+		float y;
+		float angle;
+		float time;
+	};
+
+	int bType = 0;
+	BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
+		bType = (int)ntohl(bulletData_.type);
 	}
-	if (ret > 0)
+	if (ret > 0 && bType == 6)
 	{
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		XMFLOAT3 bulletPos = pBullet->GetPosition();
@@ -68,8 +81,8 @@ void PlayScene::Update()
 		//バイトオーダー変換
 		bulletPos.x = (float)ntohl(bulletData_.x);
 		bulletPos.y = (float)ntohl(bulletData_.y);
-		angle = (float)ntohl(bulletData_.z);
-		time = (float)ntohl(bulletData_.x);
+		angle = (float)ntohl(bulletData_.angle);
+		time = (float)ntohl(bulletData_.time);
 
 		pBullet->SetPosition(bulletPos.x, bulletPos.y);
 		pBullet->SetAngle(-angle);
