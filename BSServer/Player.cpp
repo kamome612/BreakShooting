@@ -84,7 +84,7 @@ void Player::Update()
 			//‘—M
 			int type = 6;
 			XMFLOAT3 bPos = bullet->GetPosition();
-			float angle = bullet->GetAngle();
+			float angle = -(bullet->GetAngle());
 			float time = bullet->GetBulletTime();
 			long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
