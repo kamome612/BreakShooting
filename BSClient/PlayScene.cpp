@@ -81,7 +81,7 @@ void PlayScene::Update()
 		XMFLOAT3 bPos = pEnemy->GetPosition();
 		pBullet->SetPosition(bPos.x, bPos.y);
 		pBullet->SetAngle(-90);
-		pPlayer->SetBullets(pBullet);
+		//pPlayer->SetBullets(pBullet);
 		
 		//XMFLOAT3 bulletPos = pBullet->GetPosition();
 		//float angle = 0.0;

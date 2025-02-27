@@ -3,6 +3,8 @@
 #include "Bullet.h"
 #include <vector>
 
+std::vector<Bullet*> bullets;
+
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 400;
@@ -191,6 +193,11 @@ void Player::SetPosition(float _x, float _y)
 {
 	transform_.position_.x = _x;
 	transform_.position_.y = _y;
+}
+
+void Player::SetBullets(Bullet* b)
+{
+	bullets.push_back(b);
 }
 
 bool Player::CollideCircle(float x, float y, float r)
