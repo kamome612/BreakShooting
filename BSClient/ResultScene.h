@@ -1,14 +1,17 @@
 #pragma once
 #include "Engine/GameObject.h"
 class ResultScene :
-    public GameObject
+	public GameObject
 {
+private:
+	int rPict_;
+	bool isWin_;
 public:
-    //コンストラクタ
-    ResultScene(GameObject* parent);
+	//コンストラクタ
+	ResultScene(GameObject* parent);
 
-    //デストラクタ
-    ~ResultScene();
+	//デストラクタ
+	~ResultScene();
 
 	//初期化
 	void Initialize() override;

@@ -42,6 +42,7 @@ private:
 	int fImage_;
 	int Life_;
 	int BImage_;
+	int time_;
 	bool isPush_;//’e‚ğ‰Ÿ‚µ‚½‚©
 	bool reloading_;//ƒŠƒ[ƒh’†
 	int currentNum_;//Œ»İ‚Ì’e”

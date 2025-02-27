@@ -15,7 +15,7 @@ SceneManager::SceneManager(GameObject * parent)
 //èâä˙âª
 void SceneManager::Initialize()
 {
-	clearFlag_ = false;
+	winFlag_ = false;
 	keyFlag_ = false;
 	fps_ = 0;
 	sock_ = 0;
@@ -70,14 +70,14 @@ void SceneManager::ChangeScene(SCENE_ID next)
 void SceneManager::ChangeScene(SCENE_ID next, bool tmp)
 {
 	nextSceneID_ = next;
-	clearFlag_ = tmp;
+	winFlag_ = tmp;
 	keyFlag_ = tmp;
 }
 
 void SceneManager::ChangeScene(SCENE_ID next, bool tmp, int fps)
 {
 	nextSceneID_ = next;
-	clearFlag_ = tmp;
+	winFlag_ = tmp;
 	keyFlag_ = tmp;
 	fps_ = fps;
 }

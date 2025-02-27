@@ -3,6 +3,8 @@
 class ResultScene :
     public GameObject
 {
+private:
+	int rPict_;
 public:
 	//コンストラクタ
 	ResultScene(GameObject* parent);
