@@ -36,7 +36,7 @@ void PlayScene::Update()
 	XMFLOAT3 ePos = pEnemy->GetPosition();
 	long recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvPos), peek);
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvData), peek);
 		//type = (int)ntohl(recvData[0]);
 	}
 	if (ret > 0)
