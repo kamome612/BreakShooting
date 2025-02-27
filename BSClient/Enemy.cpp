@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "Bullet.h"
-
+#include "Engine/SceneManager.h"
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
@@ -28,6 +28,10 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManger");
+	if (Life_ <= 0) {
+		scenemanager->winFlag_ = true;
+	}
 }
 
 void Enemy::Draw()

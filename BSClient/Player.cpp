@@ -14,6 +14,7 @@ namespace {
 	const float HEIGHT = 680; //ステージの高さ
 	const float MARGIN = 15; //余白
 	const float FINV_TIME = 1.0f;//無敵終了時間
+	const float DEATH_TIME = 2.0f;
 
 	const int MAX_BULLET = 5;//弾の最大数
 	//const float INTERVAL = 3.0f;//リロード時間
@@ -22,7 +23,7 @@ namespace {
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1), lImage_(-1), dImage_(-1), BImage_(-1),
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
-	currentNum_(MAX_BULLET),hitFlag_(false)
+	currentNum_(MAX_BULLET),hitFlag_(false),time_(0)
 {
 	sock_ = pSceneManager->GetSock();
 	ip_ = pSceneManager->GetIP();
@@ -46,6 +47,8 @@ void Player::Initialize()
 
 void Player::Update()
 {
+	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+
 	float x = transform_.position_.x;
 	float y = transform_.position_.y;
 
@@ -121,6 +124,16 @@ void Player::Update()
 		}
 	}
 	
+	if (Life_ == 0)
+	{
+		pSceneManager->ChangeScene(SCENE_ID_RESULT);
+	}
+	
+	/*time_ += Time::DeltaTime();
+	if (time_ >= DEATH_TIME) {
+		
+	}*/
+
 	//リロード
 	//if (CheckHitKey(KEY_INPUT_L) || currentNum_ == 0)
 	//{
