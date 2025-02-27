@@ -78,7 +78,7 @@ void PlayScene::Update()
 		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
 		XMFLOAT3 bPos = pEnemy->GetPosition();
 		pBullet->SetPosition(bPos.x, bPos.y);
-		pBullet->SetAngle(-90);
+		pBullet->SetAngle(90);
 		pPlayer->SetBullets(pBullet);
 
 		//XMFLOAT3 bulletPos = pBullet->GetPosition();
