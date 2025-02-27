@@ -42,9 +42,9 @@ void PlayScene::Update()
 	if (ret > 0)
 	{
 		//バイトオーダー変換
-		ePos.x = (float)ntohl(recvData[1]);
-		ePos.y = (float)ntohl(recvData[2]);
-		ePos.z = (float)ntohl(recvData[3]);
+		ePos.x = (float)ntohl(recvData[0]);
+		ePos.y = (float)ntohl(recvData[1]);
+		ePos.z = (float)ntohl(recvData[2]);
 		/*u_long scaledX = ntohl(recvPos.x);
 		u_long scaledY = ntohl(recvPos.y);
 		u_long scaledZ = ntohl(recvPos.z);
