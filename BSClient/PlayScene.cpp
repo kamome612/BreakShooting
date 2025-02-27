@@ -66,13 +66,13 @@ void PlayScene::Update()
 		float time;
 	};
 
-	int type = 0;
+	int bType = 0;
 	BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
-		type = (int)ntohl(bulletData_.type);
+		bType = (int)ntohl(bulletData_.type);
 	}
-	if (ret > 0 && type == 6)
+	if (ret > 0 && bType == 6)
 	{
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		XMFLOAT3 bulletPos = pBullet->GetPosition();
