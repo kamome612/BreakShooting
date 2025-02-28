@@ -124,6 +124,12 @@ void Player::Update()
 		}
 	}
 
+	//€‚Ê
+	if (Life_ == 0)
+	{
+		pSceneManager->ChangeScene(SCENE_ID_RESULT);
+	}
+
 	//ƒŠƒ[ƒh
 	/*if (CheckHitKey(KEY_INPUT_L) || currentNum_ == 0)
 	{
