@@ -49,7 +49,7 @@ void PlayScene::Update()
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvData), peek);
 		//type = (int)ntohl(recvData[0]);
 	}
-	if (ret > 0)
+	if (ret > 0　&&  0 <= (float)ntohl(recvData[0]))
 	{
 		//バイトオーダー変換
 		ePos.x = (float)ntohl(recvData[0]);
