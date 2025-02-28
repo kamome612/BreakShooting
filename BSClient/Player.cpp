@@ -12,7 +12,7 @@ namespace {
 	const float RWIDTH = 1200; //ステージの右
 	const float LWIDTH = 100; //ステージの左
 	const float HEIGHT = 680; //ステージの高さ
-	const float MARGIN = 15; //余白
+	const float MARGIN = 30; //余白
 	const float FINV_TIME = 1.0f;//無敵終了時間
 	const float DEATH_TIME = 2.0f;
 
@@ -58,21 +58,21 @@ void Player::Update()
 
 	if (CheckHitKey(KEY_INPUT_D)) {
 		moveX = SPEED * Time::DeltaTime();
-		if (transform_.position_.x < RWIDTH - CHIP_SIZE + MARGIN) {
+		if (transform_.position_.x < RWIDTH - CHIP_SIZE ) {
 			transform_.position_.x += moveX;
 		}
 		else {
-			transform_.position_.x = RWIDTH - CHIP_SIZE + MARGIN; //飛び出したりガタガタしないように
+			transform_.position_.x = RWIDTH - CHIP_SIZE; //飛び出したりガタガタしないように
 		}
 
 	}
 	else if (CheckHitKey(KEY_INPUT_A)) {
 		moveX = SPEED * Time::DeltaTime();
-		if (transform_.position_.x > LWIDTH - MARGIN) {
+		if (transform_.position_.x > LWIDTH) {
 			transform_.position_.x -= moveX;
 		}
 		else {
-			transform_.position_.x = LWIDTH - MARGIN; //飛び出したりがたがたしないように
+			transform_.position_.x = LWIDTH; //飛び出したりがたがたしないように
 		}
 	}
 
@@ -174,9 +174,10 @@ void Player::Draw()
 		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
 	}
 
-	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
+	//DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
 
-	DrawCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f, GetColor(0, 0, 255), FALSE);
+	//DrawCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f, GetColor(0, 0, 255), FALSE);
+	
 	//int lenX = 870;
 	//for (int i = 0; i < bullets.size(); i++) {//弾の確認用
 	//	//DrawGraph((CHIP_SIZE * i) + 40, 30, lImage_, TRUE);
