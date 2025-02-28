@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Engine/time.h"
 #include "Bullet.h"
-#include <vector>
 
 std::vector<Bullet*> bullets;
 
@@ -23,7 +22,7 @@ namespace {
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1), lImage_(-1), dImage_(-1), BImage_(-1),
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
-	currentNum_(MAX_BULLET),hitFlag_(false)
+	currentNum_(MAX_BULLET),hitFlag_(false),invTime_(0.0f)
 {
 	sock_ = pSceneManager->GetSock();
 	ip_ = pSceneManager->GetIP();
@@ -31,7 +30,7 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
-	pImage_ = LoadGraph("Assets\\chara.png");
+	pImage_ = LoadGraph("Assets\\Player.png");
 	assert(pImage_ >= 0);
 	lImage_ = LoadGraph("Assets\\Image\\Life.png");
 	assert(lImage_ >= 0);
@@ -83,11 +82,14 @@ void Player::Update()
 			isPush_ = true;
 
 			//ëóêM
-			int type = 6;
+			//Enemy* enemy = (Enemy*)FindObject("Enemy");
+			/*XMFLOAT3 bPos = enemy->GetPosition();
 			XMFLOAT3 bPos = bullet->GetPosition();
 			float angle = -(bullet->GetAngle());
-			float time = bullet->GetBulletTime();
-			long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			float time = bullet->GetBulletTime();*/
+			int type = 6;
+			//long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			long sendData[1] = { htonl(type) };
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
@@ -121,6 +123,12 @@ void Player::Update()
 			hitFlag_ = false;
 			invTime_ = 0;
 		}
+	}
+
+	//éÄÇ 
+	if (Life_ == 0)
+	{
+		pSceneManager->ChangeScene(SCENE_ID_RESULT);
 	}
 
 	//ÉäÉçÅ[Éh
@@ -180,6 +188,11 @@ void Player::SetPosition(float _x, float _y)
 {
 	transform_.position_.x = _x;
 	transform_.position_.y = _y;
+}
+
+void Player::SetBullets(Bullet* b)
+{
+	bullets.push_back(b);
 }
 
 bool Player::CollideCircle(float x, float y, float r)

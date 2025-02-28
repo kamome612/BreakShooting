@@ -31,7 +31,7 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
-	pImage_ = LoadGraph("Assets\\chara.png");
+	pImage_ = LoadGraph("Assets\\Player.png");
 	assert(pImage_ >= 0);
 	lImage_ = LoadGraph("Assets\\Image\\Life.png");
 	assert(lImage_ >= 0);
@@ -86,10 +86,11 @@ void Player::Update()
 
 			//‘—M
 			int type = 6;
-			XMFLOAT3 bPos = bullet->GetPosition();
+			/*XMFLOAT3 bPos = bullet->GetPosition();
 			float angle = -(bullet->GetAngle());
 			float time = bullet->GetBulletTime();
-			long sendData[5] = { htonl(type), htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
+			long sendData[5] = { htonl(type), htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };*/
+			long sendData[1] = { htonl(type) };
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
@@ -124,7 +125,8 @@ void Player::Update()
 			invTime_ = 0;
 		}
 	}
-	
+
+	//Ž€‚Ê
 	if (Life_ == 0)
 	{
 		pSceneManager->ChangeScene(SCENE_ID_RESULT);
@@ -192,6 +194,11 @@ void Player::SetPosition(float _x, float _y)
 {
 	transform_.position_.x = _x;
 	transform_.position_.y = _y;
+}
+
+void Player::SetBullets(Bullet* b)
+{
+	bullets.push_back(b);
 }
 
 bool Player::CollideCircle(float x, float y, float r)

@@ -24,5 +24,7 @@ public:
 
 	//ŠJ•ú
 	void Release() override;
+
+	void ChangeResult() { isWin_ = true; }
 };
 

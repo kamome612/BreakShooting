@@ -5,6 +5,7 @@ class ResultScene :
 {
 private:
 	int rPict_;
+	bool isWin_;
 public:
 	//コンストラクタ
 	ResultScene(GameObject* parent);

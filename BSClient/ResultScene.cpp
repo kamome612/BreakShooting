@@ -5,7 +5,7 @@ ResultScene::ResultScene(GameObject* parent)
 	:GameObject(parent, "ResultScene"), rPict_(-1),isWin_(false)
 {
 	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManager");
-	isWin_ = scenemanager->winFlag_;
+	isWin_ = scenemanager->GetWinFlag();
 }
 
 ResultScene::~ResultScene()
@@ -27,7 +27,7 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	if (CheckHitKey(KEY_INPUT_T))
+	if (CheckHitKey(KEY_INPUT_R))
 	{
 		pSceneManager->ChangeScene(SCENE_ID_TITLE);
 	}

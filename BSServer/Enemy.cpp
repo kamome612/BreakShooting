@@ -1,20 +1,23 @@
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Engine/time.h"
+#include "Engine/SceneManager.h"
 
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
 	const XMFLOAT3 INIT_POS = { 320,180,0 };
+	const float FINV_TIME = 1.0f;//–³“GI—¹ŽžŠÔ
 }
 Enemy::Enemy(GameObject* parent)
 	:GameObject(parent,"Enemy"),pImage_(-1),lImage_(-1),dImage_(-1),
-	                            fImage_(-1),Life_(3)
+	                            fImage_(-1),Life_(3),invTime_(0.0f),hitFlag_(false)
 {
 }
 
 void Enemy::Initialize()
 {
-	pImage_ = LoadGraph("Assets\\chara.png");
+	pImage_ = LoadGraph("Assets\\Enemy.png");
 	assert(pImage_ >= 0);
 	lImage_ = LoadGraph("Assets\\Image\\Life.png");
 	assert(lImage_ >= 0);
@@ -28,6 +31,36 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+	float x = transform_.position_.x;
+	float y = transform_.position_.y;
+
+	//’e‚Æ‚Ì“–‚½‚è”»’è
+	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
+	for (Bullet* pBullet : pBullets) {
+		if (hitFlag_ == false) {
+			if (pBullet->CollideCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f)) {
+				Life_ -= 1;
+				hitFlag_ = true;
+			}
+		}
+	}
+
+	//’e‚ª“–‚½‚Á‚½‚ç­‚µ‚ÌŠÔ–³“G‚É‚È‚é
+	if (hitFlag_ == true) {
+		invTime_ += Time::DeltaTime();
+		if (invTime_ >= FINV_TIME) {
+			hitFlag_ = false;
+			invTime_ = 0;
+		}
+	}
+
+	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManager");
+	if (Life_ == 0) {
+		//bool flag = true;
+		//scenemanager->SetWinFlag(flag);
+		scenemanager->winFlag_ = true;
+		scenemanager->ChangeScene(SCENE_ID_RESULT);
+	}
 }
 
 void Enemy::Draw()

@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include "Engine/SceneManager.h"
+#include <vector>
+#include "Bullet.h"
 
 class Player : public GameObject
 {
@@ -26,6 +28,9 @@ public:
 
 	//ÉäÉçÅ[Éh
 	void Reload();
+
+	//BulletsÇ…í«â¡
+	void SetBullets(Bullet* b);
 	
 	bool CollideCircle(float x, float y, float r);
 private:

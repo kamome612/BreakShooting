@@ -20,20 +20,20 @@ void Stage::Initialize()
 	height_ = 680;
 
 
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 2; j++)
 		{
 			Block* pBlock = Instantiate<Block>(GetParent());
-			pBlock->SetPosition({ (float)190 + (60 * i) + 10,(float)330 + (100 * j) + (float)2.5,(float)0 });
+			pBlock->SetPosition({ (float)150 + (120 * i) + 50,(float)280 + (200 * j) + (float)2.5,(float)0 });
 			hBlock.push_back(pBlock);
 		}
 
 	}
-	for (int i = 0; i < 18; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		Block* pBlock2 = Instantiate<Block>(GetParent());
-		pBlock2->SetPosition({ (float)100 + (60 * i) + 10,(float)390 - (15 / 2),(float)0 });
+		pBlock2->SetPosition({ (float)110 + (100 * i) + 10,(float)390 - (15 / 2),(float)0 });
 		hBlock.push_back(pBlock2);
 	}
 }

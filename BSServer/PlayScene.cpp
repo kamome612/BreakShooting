@@ -1,8 +1,10 @@
 #include "PlayScene.h"
 #include "Stage.h"
+#include "Engine/time.h"
+#include <string>
 
 PlayScene::PlayScene(GameObject* parent)
-	: GameObject(parent,"PlayScene")
+	: GameObject(parent,"PlayScene"),fpsTimer_(0.0f),fpsCount_(0),fps_(0)
 {
 }
 
@@ -19,6 +21,14 @@ void PlayScene::Initialize()
 
 void PlayScene::Update()
 {
+	//fps確認用
+	if (fpsTimer_ >= 1.0f) {
+		fpsTimer_ = 0.0f;
+		fps_ = fpsCount_;
+		fpsCount_ = 0;
+	}
+	fpsTimer_ += Time::DeltaTime();
+	fpsCount_++;
 
 	/*ePlayer->SendData();
 	pPlayer->RecvData();
@@ -32,7 +42,8 @@ void PlayScene::Update()
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &recvPos, sizeof(recvPos), peek);
 	}
-	if (ret > 0)
+	float tmp = (float)ntohl(recvPos[0]);
+	if (ret > 0 && 0 <= tmp)
 	{
 		//バイトオーダー変換
 		ePos.x = (float)ntohl(recvPos[0]);
@@ -55,37 +66,45 @@ void PlayScene::Update()
 	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
 	ret = NetWorkSendUDP(sock, recvIp, 8888, &sendPos, sizeof(sendPos));
 
-	struct BulletData
+	/*struct BulletData
 	{
 		int type;
 		float x;
 		float y;
 		float angle;
 		float time;
-	};
+	};*/
 
 	int bType = 0;
 
-	BulletData bulletData_ = { 0,0,0,0,0 };
+	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
-		bType = (int)ntohl(bulletData_.type);
+		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bType, sizeof(bType), peek);
+		bType = (int)ntohl(bType);
 	}
 	if (ret > 0 && bType == 6)
 	{
+		Player* pPlayer = (Player*)FindObject("Player");
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
-		XMFLOAT3 bulletPos = pBullet->GetPosition();
-		float angle = 0.0;
-		float time = 0.0;
-		//バイトオーダー変換
-		bulletPos.x = (float)ntohl(bulletData_.x);
-		bulletPos.y = (float)ntohl(bulletData_.y);
-		angle = (float)ntohl(bulletData_.angle);
-		time = (float)ntohl(bulletData_.time);
+		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
+		XMFLOAT3 bPos = pEnemy->GetPosition();
+		bPos.y += 50;
+		pBullet->SetPosition(bPos.x, bPos.y);
+		pBullet->SetAngle(90);
+		pPlayer->SetBullets(pBullet);
 
-		pBullet->SetPosition(bulletPos.x, bulletPos.y);
-		pBullet->SetAngle(-angle);
-		pBullet->SetBulletTime(time);
+		//XMFLOAT3 bulletPos = pBullet->GetPosition();
+		//float angle = 0.0;
+		//float time = 0.0;
+		////バイトオーダー変換
+		//bulletPos.x = (float)ntohl(bulletData_.x);
+		//bulletPos.y = (float)ntohl(bulletData_.y);
+		//angle = (float)ntohl(bulletData_.angle);
+		//time = (float)ntohl(bulletData_.time);
+
+		//pBullet->SetPosition(bulletPos.x, bulletPos.y);
+		//pBullet->SetAngle(-angle);
+		//pBullet->SetBulletTime(time);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{
@@ -98,6 +117,9 @@ void PlayScene::Update()
 void PlayScene::Draw()
 {
 	DrawGraph(0, 0, Image_, TRUE);
+	std::string s = std::to_string(fps_);
+	int Cr = GetColor(255, 255, 255);
+	DrawString(620, 0, s.c_str(), Cr);
 }
 
 void PlayScene::Release()
