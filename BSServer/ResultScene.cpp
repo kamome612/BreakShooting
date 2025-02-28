@@ -27,7 +27,7 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	if (CheckHitKey(KEY_INPUT_T))
+	if (CheckHitKey(KEY_INPUT_R))
 	{
 		pSceneManager->ChangeScene(SCENE_ID_TITLE);
 	}
