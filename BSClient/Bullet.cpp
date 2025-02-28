@@ -16,7 +16,7 @@ namespace
 	const float MARGIN = 15; //—]”’
 
 	float myR = 8.0f;
-	const float posX = 0;//xÀ•W‚ÌC³
+	const float posX = 30;//xÀ•W‚ÌC³
 }
 
 Bullet::Bullet(GameObject* parent)
