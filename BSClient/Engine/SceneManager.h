@@ -55,6 +55,11 @@ public:
 	//IPアドレスのセッター
 	void SetIP(IPDATA _ip) { ip_ = _ip; }
 
+	//winFlagのゲッター
+	bool GetWinFlag() { return winFlag_; }
+
+	//winFlagのセッター
+	void SetWinFlag(bool flag) { winFlag_ = flag; }
 private:
 	SCENE_ID currentSceneID_;	//現在のシーン
 	SCENE_ID nextSceneID_;		//次のシーン

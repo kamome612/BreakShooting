@@ -56,7 +56,8 @@ void Enemy::Update()
 
 	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManger");
 	if (Life_ <= 0) {
-		scenemanager->winFlag_ = true;
+		bool flag = true;
+		scenemanager->SetWinFlag(flag);
 	}
 }
 
