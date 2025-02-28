@@ -25,8 +25,9 @@ void Enemy::Initialize()
 	assert(dImage_ >= 0);
 	fImage_ = LoadGraph("Assets\\Image\\LifeFrame.png");
 	assert(fImage_ >= 0);
-
+	
 	transform_.position_ = INIT_POS;
+	transform_.rotate_ = 180;
 }
 
 void Enemy::Update()
