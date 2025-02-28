@@ -50,7 +50,7 @@ void PlayScene::Update()
 		//type = (int)ntohl(recvData[0]);
 	}
 	float tmp = (float)ntohl(recvData[0]);
-	if (ret > 0　&&  0 <= tmp)
+	if (ret > 0 && 0 <= tmp)
 	{
 		//バイトオーダー変換
 		ePos.x = (float)ntohl(recvData[0]);
