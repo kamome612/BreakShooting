@@ -38,7 +38,7 @@ void Enemy::Update()
 	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullets) {
 		if (hitFlag_ == false) {
-			if (pBullet->CollideCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f)) {
+			if (pBullet->CollideCircle(x , y, 20.0f)) {
 				Life_ -= 1;
 				hitFlag_ = true;
 			}
@@ -87,7 +87,7 @@ void Enemy::Draw()
 		DrawExtendGraph((CHIP_SIZE * i) + lenYff+5, lenY, (CHIP_SIZE * i)+ 980,lenY + 45, lImage_, TRUE);
 	}
 
-	DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
+	//DrawBox(x + 15, y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 0), FALSE);//当たり判定確認用
 }
 
 void Enemy::Release()
