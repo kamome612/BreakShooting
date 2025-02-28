@@ -125,7 +125,8 @@ void Player::Update()
 			invTime_ = 0;
 		}
 	}
-	
+
+	//Ž€‚Ê
 	if (Life_ == 0)
 	{
 		pSceneManager->ChangeScene(SCENE_ID_RESULT);

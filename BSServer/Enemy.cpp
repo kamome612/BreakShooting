@@ -58,6 +58,7 @@ void Enemy::Update()
 	if (Life_ <= 0) {
 		bool flag = true;
 		scenemanager->SetWinFlag(flag);
+		scenemanager->ChangeScene(SCENE_ID_RESULT);
 	}
 }
 

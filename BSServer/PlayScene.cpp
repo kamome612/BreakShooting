@@ -65,21 +65,21 @@ void PlayScene::Update()
 	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
 	ret = NetWorkSendUDP(sock, recvIp, 8888, &sendPos, sizeof(sendPos));
 
-	struct BulletData
+	/*struct BulletData
 	{
 		int type;
 		float x;
 		float y;
 		float angle;
 		float time;
-	};
+	};*/
 
 	int bType = 0;
 
-	BulletData bulletData_ = { 0,0,0,0,0 };
+	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
-		bType = (int)ntohl(bulletData_.type);
+		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bType, sizeof(bType), peek);
+		bType = (int)ntohl(bType);
 	}
 	if (ret > 0 && bType == 6)
 	{
@@ -87,6 +87,7 @@ void PlayScene::Update()
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
 		XMFLOAT3 bPos = pEnemy->GetPosition();
+		bPos.y += 10;
 		pBullet->SetPosition(bPos.x, bPos.y);
 		pBullet->SetAngle(90);
 		pPlayer->SetBullets(pBullet);
