@@ -89,6 +89,7 @@ void PlayScene::Update()
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
 		XMFLOAT3 bPos = pEnemy->GetPosition();
+		bPos.y += 10;
 		pBullet->SetPosition(bPos.x, bPos.y);
 		pBullet->SetAngle(90);
 		//pPlayer->SetBullets(pBullet);
