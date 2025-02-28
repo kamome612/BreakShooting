@@ -18,7 +18,7 @@ void Block::Draw()
 {
 	float x = transform_.position_.x;
 	float y = transform_.position_.y;
-	DrawBoxAA(x,y,x + width_ + 1, y + height_ + 1, Bc, FALSE);
+	DrawBoxAA(x,y,x + width_ + 0.5, y + height_ + 0.5, Bc, FALSE);
 }
 
 void Block::Release()
