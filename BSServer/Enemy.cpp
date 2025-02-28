@@ -27,7 +27,7 @@ void Enemy::Initialize()
 	assert(fImage_ >= 0);
 
 	transform_.position_ = INIT_POS;
-	transform_.rotate_.x = 180;
+	transform_.rotate_.x = 90;
 }
 
 void Enemy::Update()
