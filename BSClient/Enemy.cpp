@@ -17,7 +17,7 @@ Enemy::Enemy(GameObject* parent)
 
 void Enemy::Initialize()
 {
-	pImage_ = LoadGraph("Assets\\chara.png");
+	pImage_ = LoadGraph("Assets\\Enemy.png");
 	assert(pImage_ >= 0);
 	lImage_ = LoadGraph("Assets\\Image\\Life.png");
 	assert(lImage_ >= 0);

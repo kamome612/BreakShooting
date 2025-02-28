@@ -31,7 +31,7 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
-	pImage_ = LoadGraph("Assets\\chara.png");
+	pImage_ = LoadGraph("Assets\\Player.png");
 	assert(pImage_ >= 0);
 	lImage_ = LoadGraph("Assets\\Image\\Life.png");
 	assert(lImage_ >= 0);
