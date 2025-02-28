@@ -14,6 +14,7 @@ namespace {
 	const float HEIGHT = 680; //ステージの高さ
 	const float MARGIN = 15; //余白
 	const float FINV_TIME = 1.0f;//無敵終了時間
+	const float DEATH_TIME = 2.0f;
 
 	const int MAX_BULLET = 5;//弾の最大数
 	//const float INTERVAL = 3.0f;//リロード時間
