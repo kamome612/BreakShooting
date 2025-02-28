@@ -16,7 +16,12 @@ public:
     void Update() override;
     void Draw() override;
     float GetAngle() { return angle_; }
-    void SetAngle(float _angle) { angle_ = _angle; }
+    float GetRandomAngle() { return randomAngle_; }
+    void SetAngle(float _angle, float _rAngle)
+    {
+        angle_ = _angle,
+        randomAngle_ = _rAngle;
+    }
     float GetBulletTime() { return BulletTime_; }
     void SetBulletTime(float _time) { BulletTime_ = _time; }
 
@@ -27,6 +32,6 @@ private:
     float angle_;//角度
     float moveX;
     float moveY;
-
+    float randomAngle_; //垂直に壁に当たった時の変更に使う角度
 };
 

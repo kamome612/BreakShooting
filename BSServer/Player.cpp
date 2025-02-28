@@ -80,6 +80,8 @@ void Player::Update()
 			bullets.push_back(bullet);
 			//currentNum_--;
 			isPush_ = true;
+			float rAngle = 0;
+			rAngle = bullet->GetRandomAngle();
 
 			//‘—M
 			//Enemy* enemy = (Enemy*)FindObject("Enemy");
@@ -89,7 +91,7 @@ void Player::Update()
 			float time = bullet->GetBulletTime();*/
 			int type = 6;
 			//long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
-			long sendData[1] = { htonl(type) };
+			long sendData[2] = { htonl(type),htonl(rAngle)};
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}

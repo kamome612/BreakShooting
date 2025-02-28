@@ -30,6 +30,14 @@ void Bullet::Initialize()
 {
 	hImage_ = LoadGraph("Assets\\Image\\missile.png");
 	assert(hImage_ > 0);
+
+	if (rand() % 2 == 0)
+	{
+		randomAngle_ = 3.0f * XM_PI / 4.0f;
+	}
+	else {
+		randomAngle_ = -XM_PI / 4.0f; // 右斜め上（右向き）
+	}
 }
 
 
@@ -105,14 +113,15 @@ void Bullet::WallJudge()
 		transform_.position_.y = height + MARGIN;
 
 		if (angle_ == (XM_PI / -2.0)) {//90度だったら
-			if (rand() % 2 == 0)
-			{
-				angle_ = 3.0f * XM_PI / 4.0f;
-			}
-			else {
-				angle_ = -XM_PI / 4.0f; // 右斜め上（右向き）
+			angle_ = randomAngle_;
+			//if (rand() % 2 == 0)
+			//{
+			//	angle_ = 3.0f * XM_PI / 4.0f;
+			//}
+			//else {
+			//	angle_ = -XM_PI / 4.0f; // 右斜め上（右向き）
 
-			}
+			//}
 		}
 		else {
 			angle_ = -angle_;
