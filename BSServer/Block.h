@@ -7,6 +7,9 @@ class Block :
 	int Bc;
 	int width_ = 51;
 	int height_ = 20;
+
+	bool isDead;
+	float BlockTime_;
 public:
 	//引数：parent  親オブジェクト（SceneManager）
 	Block(GameObject* parent);

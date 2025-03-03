@@ -6,7 +6,7 @@
 
 namespace
 {
-	const float Speed_{ 550.0 };
+	const float Speed_{ 400.0 };
 	const float LimitTime_ = 4.0f;
 
 	const float Lwidth = 100; //¶•Ç
@@ -169,16 +169,16 @@ void Bullet::BlockJudge()
 		}
 	}
 
-	for (auto& blocks : dBlocks) {
-		blocks->KillMe();
+	//for (auto& blocks : dBlocks) {
+	//	blocks->KillMe();
 
-		//—v‘f‚³‚ª‚µ
-		std::vector<Block*>::iterator it = std::find(Stage::hBlock.begin(), Stage::hBlock.end(), blocks);
-		if (it != Stage::hBlock.end())
-		{
-			Stage::hBlock.erase(it); // íœ
-		}
-	}
+	//	//—v‘f‚³‚ª‚µ
+	//	std::vector<Block*>::iterator it = std::find(Stage::hBlock.begin(), Stage::hBlock.end(), blocks);
+	//	if (it != Stage::hBlock.end())
+	//	{
+	//		Stage::hBlock.erase(it); // íœ
+	//	}
+	//}
 }
 
 bool Bullet::IsAlive()
