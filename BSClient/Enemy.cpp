@@ -38,7 +38,7 @@ void Enemy::Update()
 	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullets) {
 		if (hitFlag_ == false) {
-			if (pBullet->CollideCircle(x+CHIP_SIZE/2, y+CHIP_SIZE, 20.0f)) {
+			if (pBullet->CollideCircle(x+CHIP_SIZE/2, y+CHIP_SIZE/2, 20.0f)) {
 				Life_ -= 1;
 				hitFlag_ = true;
 			}
