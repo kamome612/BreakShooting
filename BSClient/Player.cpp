@@ -176,7 +176,7 @@ void Player::Draw()
 		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
 	}
 
-	//DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
+	DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
 
 	//DrawCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f, GetColor(0, 0, 255), FALSE);
 	
