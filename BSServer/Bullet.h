@@ -22,6 +22,12 @@ public:
         angle_ = _angle,
         randomAngle_ = _rAngle;
     }
+
+    void SetAngle(float _angle)
+    {
+        angle_ = _angle;
+    }
+
     float GetBulletTime() { return BulletTime_; }
     void SetBulletTime(float _time) { BulletTime_ = _time; }
 

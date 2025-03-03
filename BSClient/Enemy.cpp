@@ -17,7 +17,7 @@ Enemy::Enemy(GameObject* parent)
 
 void Enemy::Initialize()
 {
-	pImage_ = LoadGraph("Assets\\Enemy.png");
+	pImage_ = LoadGraph("Assets\\Enemy2.png");
 	assert(pImage_ >= 0);
 	lImage_ = LoadGraph("Assets\\Image\\Life.png");
 	assert(lImage_ >= 0);
@@ -38,7 +38,7 @@ void Enemy::Update()
 	std::list<Bullet*> pBullets = GetParent()->FindGameObjects<Bullet>();
 	for (Bullet* pBullet : pBullets) {
 		if (hitFlag_ == false) {
-			if (pBullet->CollideCircle(x, y, 20.0f)) {
+			if (pBullet->CollideCircle(x+CHIP_SIZE/2, y+CHIP_SIZE, 20.0f)) {
 				Life_ -= 1;
 				hitFlag_ = true;
 			}
@@ -67,8 +67,8 @@ void Enemy::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	//DrawGraph(x, y, pImage_, TRUE);
-	DrawRotaGraph(x, y, 1, XM_PI,pImage_, false, false);
+	DrawGraph(x, y, pImage_, TRUE);
+	//DrawRotaGraph(x, y, 1, XM_PI,pImage_, false, false);
 
 	// ライフの枠
 	int lenF = 900;  // x移動
@@ -88,10 +88,10 @@ void Enemy::Draw()
 	}
 
 
-	//DrawCircle(x , y , 20.0f, GetColor(0, 0, 255), FALSE);
+	DrawCircle(x+CHIP_SIZE/2 , y+CHIP_SIZE/2 , 20.0f, GetColor(0, 0, 255), FALSE);
 
 
-	//DrawBox(x , y, x + CHIP_SIZE - 15, y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
+	//DrawBox(x-CHIP_SIZE/2 , y-CHIP_SIZE/2, x+CHIP_SIZE/2, y +CHIP_SIZE/2, GetColor(0, 0, 255), FALSE);//当たり判定確認用
 }
 
 void Enemy::Release()

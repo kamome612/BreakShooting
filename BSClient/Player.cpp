@@ -92,7 +92,8 @@ void Player::Update()
 			float angle = -(bullet->GetAngle());
 			float time = bullet->GetBulletTime();
 			long sendData[5] = { htonl(type), htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };*/
-			long sendData[2] = { htonl(type), htonl(rAngle)};
+			//long sendData[2] = { htonl(type), htonl(rAngle)};
+			long sendData = htonl(type);
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
@@ -176,7 +177,7 @@ void Player::Draw()
 		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
 	}
 
-	//DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
+	DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
 
 	//DrawCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f, GetColor(0, 0, 255), FALSE);
 	
