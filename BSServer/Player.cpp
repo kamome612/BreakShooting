@@ -84,14 +84,9 @@ void Player::Update()
 			rAngle = bullet->GetRandomAngle();
 
 			//‘—M
-			//Enemy* enemy = (Enemy*)FindObject("Enemy");
-			/*XMFLOAT3 bPos = enemy->GetPosition();
-			XMFLOAT3 bPos = bullet->GetPosition();
-			float angle = -(bullet->GetAngle());
-			float time = bullet->GetBulletTime();*/
 			int type = 6;
-			//long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
-			float sendData[2] = { htonl(type),htonl(rAngle)};
+			//float sendData[2] = { htonl(type),htonl(rAngle)};
+			float sendData[2] = { type, rAngle };
 			//long sendData = htonl(type);
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}

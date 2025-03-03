@@ -36,30 +36,30 @@ void PlayScene::Update()
 
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
-	float sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
-
+	//float sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
+	float sendPos[3] = { pPos.x,pPos.y,pPos.z };
 	int ret = NetWorkSendUDP(sock, sendIp, 8888, &sendPos, sizeof(sendPos));
     
 	int recvPort;
 	int peek = 0;
 	int type;
 	XMFLOAT3 ePos = pEnemy->GetPosition();
-	float recvData[3] = { 0,0,0 };
+	float recvPos[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvData), peek);
+		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvPos, sizeof(recvPos), peek);
 		//type = (int)ntohl(recvData[0]);
 	}
-	float tmp = (float)ntohl(recvData[0]);
+	//float tmp = (float)ntohl(recvPos[0]);
+	float tmp = recvPos[0];
 	if (ret > 0 && 0 < tmp)
 	{
 		//バイトオーダー変換
-		ePos.x = (float)ntohl(recvData[0]);
+		/*ePos.x = (float)ntohl(recvData[0]);
 		ePos.y = (float)ntohl(recvData[1]);
-		ePos.z = (float)ntohl(recvData[2]);
-		/*u_long scaledX = ntohl(recvPos.x);
-		u_long scaledY = ntohl(recvPos.y);
-		u_long scaledZ = ntohl(recvPos.z);
-		ePos = { (float)scaledX,(float)scaledY,(float)scaledZ };*/
+		ePos.z = (float)ntohl(recvData[2]);*/
+		ePos.x = recvPos[0];
+		ePos.y = recvPos[1];
+		ePos.z = recvPos[2];
 		pEnemy->SetPosition(ePos);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
@@ -82,9 +82,8 @@ void PlayScene::Update()
 	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bData, sizeof(bData), peek);
-		//ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bType, sizeof(bType), peek);
-		bType = (int)ntohl(bData[0]);
-		//bType = (int)ntohl(bType);
+		//bType = (int)ntohl(bData[0]);
+		bType = (int)bData[0];
 	}
 	if (ret > 0 && bType == 6)
 	{
@@ -92,7 +91,8 @@ void PlayScene::Update()
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
 		XMFLOAT3 bPos = pEnemy->GetPosition();
-		float rAngle = (int)ntohl(bData[1]);
+		//float rAngle = (float)ntohl(bData[1]);
+		float rAngle = bData[1];
 		bPos.y += 64;
 		//bPos.x -= 30;
 		pBullet->SetPosition(bPos.x, bPos.y);
