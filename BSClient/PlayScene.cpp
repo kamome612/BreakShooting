@@ -15,7 +15,7 @@ void PlayScene::Initialize()
 	pPlayer = Instantiate<Player>(GetParent());
 	pEnemy = Instantiate<Enemy>(GetParent());
 	sock = pSceneManager->GetSock();
-	sendIp = pSceneManager->GetIP();
+	Ip = pSceneManager->GetIP();
 }
 
 void PlayScene::Update()
@@ -29,38 +29,39 @@ void PlayScene::Update()
 	fpsTimer_ += Time::DeltaTime();
 	fpsCount_++;
 
-	/*ePlayer->SendData();
-	pPlayer->RecvData();
-	pPlayer->SendData();
-	ePlayer->RecvData();*/
+	int ret = 0;
+	int recvPort;
+	int peek = 0;
+	int type = 0;
 
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
-	//float sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
-	float sendPos[3] = { pPos.x,pPos.y,pPos.z };
-	int ret = NetWorkSendUDP(sock, sendIp, 8888, &sendPos, sizeof(sendPos));
-    
-	int recvPort;
-	int peek = 0;
-	int type;
+	type = 1;
+	float sendData[3] = { type,pPos.x,pPos.y };
+	ret = NetWorkSendUDP(sock, Ip, 8888, &sendData, sizeof(sendData));
+
 	XMFLOAT3 ePos = pEnemy->GetPosition();
-	float recvPos[3] = { 0,0,0 };
+	float recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvPos, sizeof(recvPos), peek);
-		//type = (int)ntohl(recvData[0]);
+		ret = NetWorkRecvUDP(sock, &Ip, &recvPort, &recvData, sizeof(recvData), peek);
+		type = recvData[0];
 	}
-	//float tmp = (float)ntohl(recvPos[0]);
-	float tmp = recvPos[0];
-	if (ret > 0 && 0 < tmp)
-	{
-		//バイトオーダー変換
-		/*ePos.x = (float)ntohl(recvData[0]);
-		ePos.y = (float)ntohl(recvData[1]);
-		ePos.z = (float)ntohl(recvData[2]);*/
-		ePos.x = recvPos[0];
-		ePos.y = recvPos[1];
-		ePos.z = recvPos[2];
+	if (ret > 0 && type == 1) {
+		ePos.x = recvData[1];
+		ePos.y = recvData[2];
+		ePos.z = 0;
 		pEnemy->SetPosition(ePos);
+	}
+	else if (ret > 0 && type == 2) {
+		Player* pPlayer = (Player*)FindObject("Player");
+		Bullet* pBullet = Instantiate<Bullet>(GetParent());
+		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
+		XMFLOAT3 bPos = pEnemy->GetPosition();
+		float rAngle = recvData[1];
+		bPos.y += 64;
+		pBullet->SetPosition(bPos.x, bPos.y);
+		pBullet->SetAngle(XM_PI / 2, XM_2PI - rAngle);
+		pPlayer->SetBullets(pBullet);
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{
@@ -68,67 +69,119 @@ void PlayScene::Update()
 		printfDx("%d", ret);
 	}
 
-	/*struct BulletData
-	{
-		int type;
-		float x;
-		float y;
-		float angle;
-		float time;
-	};*/
-
-	int bType = 0;
-	float bData[2] = { 0,0 };
-	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bData, sizeof(bData), peek);
-		//bType = (int)ntohl(bData[0]);
-		bType = (int)bData[0];
+		ret = NetWorkRecvUDP(sock, &Ip, &recvPort, &recvData, sizeof(recvData), peek);
+		type = recvData[0];
 	}
-	if (ret > 0 && bType == 6)
-	{
+	if (ret > 0 && type == 1) {
+		ePos.x = recvData[1];
+		ePos.y = recvData[2];
+		ePos.z = 0;
+		pEnemy->SetPosition(ePos);
+	}
+	else if (ret > 0 && type == 2) {
 		Player* pPlayer = (Player*)FindObject("Player");
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
 		XMFLOAT3 bPos = pEnemy->GetPosition();
-		//float rAngle = (float)ntohl(bData[1]);
-		float rAngle = bData[1];
+		float rAngle = recvData[1];
 		bPos.y += 64;
-		//bPos.x -= 30;
 		pBullet->SetPosition(bPos.x, bPos.y);
-		pBullet->SetAngle(XM_PI/2,XM_2PI - rAngle);
+		pBullet->SetAngle(XM_PI / 2, XM_2PI - rAngle);
 		pPlayer->SetBullets(pBullet);
-		
-		//XMFLOAT3 bulletPos = pBullet->GetPosition();
-		//float angle = 0.0;
-		//float time = 0.0;
-		////バイトオーダー変換
-		//bulletPos.x = (float)ntohl(bulletData_.x);
-		//bulletPos.y = (float)ntohl(bulletData_.y);
-		//angle = (float)ntohl(bulletData_.angle);
-		//time = (float)ntohl(bulletData_.time);
+	}
+	else if (ret == -1 || ret == -2 || ret == -3)
+	{
+		// 受信失敗のエラー処理
+		printfDx("%d", ret);
+	}
 
-		//pBullet->SetPosition(bulletPos.x, bulletPos.y);
-		//pBullet->SetAngle(-angle);
-		//pBullet->SetBulletTime(time);
-	}
-	else {
-		//受信失敗のエラー内容
-		switch (ret)
-		{
-		case -1:
-			printfDx("エラー");
-			break;
-		case -2:
-			printfDx("受信データよりバッファのサイズの方が小さい");
-			break;
-		case -3:
-			printfDx("受信データがない");
-			break;
-		default:
-			break;
-		}
-	}
+	//XMFLOAT3 pPos = pPlayer->GetPosition();
+	//pPos.y = 180.0f;
+	////float sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
+	//float sendPos[3] = { pPos.x,pPos.y,pPos.z };
+	//int ret = NetWorkSendUDP(sock, sendIp, 8888, &sendPos, sizeof(sendPos));
+    //   
+	//int recvPort;
+	//int peek = 0;
+	//int type;
+	//XMFLOAT3 ePos = pEnemy->GetPosition();
+	//float recvPos[3] = { 0,0,0 };
+	//if (CheckNetWorkRecvUDP(sock)) {
+	//	ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvPos, sizeof(recvPos), peek);
+	//	//type = (int)ntohl(recvData[0]);
+	//}
+	////float tmp = (float)ntohl(recvPos[0]);
+	//float tmp = recvPos[0];
+	//if (ret > 0 && 0 < tmp)
+	//{
+	//	//バイトオーダー変換
+	//	/*ePos.x = (float)ntohl(recvData[0]);
+	//	ePos.y = (float)ntohl(recvData[1]);
+	//	ePos.z = (float)ntohl(recvData[2]);*/
+	//	ePos.x = recvPos[0];
+	//	ePos.y = recvPos[1];
+	//	ePos.z = recvPos[2];
+	//	pEnemy->SetPosition(ePos);
+	//}
+	//else if (ret == -1 || ret == -2 || ret == -3)
+	//{
+	//	// 受信失敗のエラー処理
+	//	printfDx("%d", ret);
+	//}
+	//
+	//int bType = 0;
+	//float bData[2] = { 0,0 };
+	////BulletData bulletData_ = { 0,0,0,0,0 };
+	//if (CheckNetWorkRecvUDP(sock)) {
+	//	ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bData, sizeof(bData), peek);
+	//	//bType = (int)ntohl(bData[0]);
+	//	bType = (int)bData[0];
+	//}
+	//if (ret > 0 && bType == 6)
+	//{
+	//	Player* pPlayer = (Player*)FindObject("Player");
+	//	Bullet* pBullet = Instantiate<Bullet>(GetParent());
+	//	Enemy* pEnemy = (Enemy*)FindObject("Enemy");
+	//	XMFLOAT3 bPos = pEnemy->GetPosition();
+	//	//float rAngle = (float)ntohl(bData[1]);
+	//	float rAngle = bData[1];
+	//	bPos.y += 64;
+	//	//bPos.x -= 30;
+	//	pBullet->SetPosition(bPos.x, bPos.y);
+	//	pBullet->SetAngle(XM_PI/2,XM_2PI - rAngle);
+	//	pPlayer->SetBullets(pBullet);
+	//	
+	//	//XMFLOAT3 bulletPos = pBullet->GetPosition();
+	//	//float angle = 0.0;
+	//	//float time = 0.0;
+	//	////バイトオーダー変換
+	//	//bulletPos.x = (float)ntohl(bulletData_.x);
+	//	//bulletPos.y = (float)ntohl(bulletData_.y);
+	//	//angle = (float)ntohl(bulletData_.angle);
+	//	//time = (float)ntohl(bulletData_.time);
+	//
+	//	//pBullet->SetPosition(bulletPos.x, bulletPos.y);
+	//	//pBullet->SetAngle(-angle);
+	//	//pBullet->SetBulletTime(time);
+	//}
+	//else {
+	//	//受信失敗のエラー内容
+	//	switch (ret)
+	//	{
+	//	case -1:
+	//		printfDx("エラー");
+	//		break;
+	//	case -2:
+	//		printfDx("受信データよりバッファのサイズの方が小さい");
+	//		break;
+	//	case -3:
+	//		printfDx("受信データがない");
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
 }
 
 void PlayScene::Draw()

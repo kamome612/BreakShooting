@@ -11,7 +11,7 @@ class PlayScene :
 	Player* pPlayer;
 	Enemy* pEnemy;
 	int sock;
-	IPDATA sendIp;
+	IPDATA Ip;
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
     
 	//‚¿‚å‚¢fpsŠm”F—p
