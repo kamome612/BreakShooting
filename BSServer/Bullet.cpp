@@ -114,14 +114,6 @@ void Bullet::WallJudge()
 
 		if (angle_ == (XM_PI / -2.0) || angle_ == (XM_PI / 2.0)) {//90度だったら
 			angle_ = randomAngle_;
-			//if (rand() % 2 == 0)
-			//{
-			//	angle_ = 3.0f * XM_PI / 4.0f;
-			//}
-			//else {
-			//	angle_ = -XM_PI / 4.0f; // 右斜め上（右向き）
-
-			//}
 		}
 		else {
 			angle_ = -angle_;
@@ -132,22 +124,12 @@ void Bullet::WallJudge()
 	if (transform_.position_.y > low - MARGIN) {//地面
 		if (angle_ == (XM_PI / -2.0) || angle_ == (XM_PI / 2.0)) {//90度だったら
 			angle_ = randomAngle_;
-			//if (rand() % 2 == 0)
-			//{
-			//	angle_ = 3.0f * XM_PI / 4.0f;
-			//}
-			//else {
-			//	angle_ = -XM_PI / 4.0f; // 右斜め上（右向き）
-
-			//}
 		}
 		else {
 			transform_.position_.y = low - MARGIN;
 			angle_ = -angle_;
 		}
 	}
-
-
 }
 
 void Bullet::BlockJudge()
