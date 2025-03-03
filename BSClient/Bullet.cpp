@@ -169,13 +169,14 @@ void Bullet::BlockJudge()
 		{
 			dBlocks.push_back(blocks);
 
-			if (angle_ == (XM_PI / -2.0f)) {
-				if (rand() % 2 == 0) {
-					angle_ = 3.0f * XM_PI / 4.0f; //ç∂
-				}
-				else {
-					angle_ = -XM_PI / 4.0f;
-				}
+			if (angle_ == (XM_PI / -2.0f) || angle_ == (XM_PI / 2.0)) {
+				angle_ = randomAngle_;
+				//if (rand() % 2 == 0) {
+				//	angle_ = 3.0f * XM_PI / 4.0f; //ç∂
+				//}
+				//else {
+				//	angle_ = -XM_PI / 4.0f;
+				//}
 			}
 			else {
 				angle_ = -angle_;
