@@ -78,8 +78,7 @@ void PlayScene::Update()
 	};*/
 
 	int bType = 0;
-	//float bData[2] = { 0,0 };
-	float bData = 0;
+	float bData[2] = { 0,0 };
 	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		//ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &bulletData_, sizeof(bulletData_), peek);
@@ -95,8 +94,9 @@ void PlayScene::Update()
 		XMFLOAT3 bPos = pEnemy->GetPosition();
 		//float rAngle = (int)ntohl(bData[1]);
 		bPos.y += 64;
-		bPos.x -= 30;
+		//bPos.x -= 30;
 		pBullet->SetPosition(bPos.x, bPos.y);
+		pBullet->SetAngle(90);
 		//pBullet->SetAngle(90,rAngle);
 		pPlayer->SetBullets(pBullet);
 		
