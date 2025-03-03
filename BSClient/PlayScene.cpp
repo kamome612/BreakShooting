@@ -21,13 +21,13 @@ void PlayScene::Initialize()
 void PlayScene::Update()
 {
 	//fps確認用
-	if (fpsTimer_ >= 1.0f) {
+	/*if (fpsTimer_ >= 1.0f) {
 		fpsTimer_ = 0.0f;
 		fps_ = fpsCount_;
 		fpsCount_ = 0;
 	}
 	fpsTimer_ += Time::DeltaTime();
-	fpsCount_++;
+	fpsCount_++;*/
 
 	int ret = 0;
 	int recvPort;
@@ -65,8 +65,8 @@ void PlayScene::Update()
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{
-		// 受信失敗のエラー処理
-		printfDx("%d", ret);
+		// 受信失敗のエラー確認用
+		//printfDx("%d", ret);
 	}
 
 	if (CheckNetWorkRecvUDP(sock)) {
@@ -92,8 +92,8 @@ void PlayScene::Update()
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
 	{
-		// 受信失敗のエラー処理
-		printfDx("%d", ret);
+		// 受信失敗のエラー確認用
+		//printfDx("%d", ret);
 	}
 
 	//XMFLOAT3 pPos = pPlayer->GetPosition();
@@ -187,9 +187,11 @@ void PlayScene::Update()
 void PlayScene::Draw()
 {
 	DrawGraph(0, 0, Image_, TRUE);
-	std::string s = std::to_string(fps_);
+
+	//fps確認用
+	/*std::string s = std::to_string(fps_);
 	int Cr = GetColor(255, 255, 255);
-	DrawString(620, 0, s.c_str(), Cr);
+	DrawString(620, 0, s.c_str(), Cr);*/
 }
 
 void PlayScene::Release()
