@@ -36,7 +36,7 @@ void Bullet::Initialize()
 		randomAngle_ = 3.0f * XM_PI / 4.0f;
 	}
 	else {
-		randomAngle_ = -XM_PI / 4.0f; // 右斜め上（右向き）
+		randomAngle_ = XM_PI / 4.0f; // 右斜め上（右向き）
 	}
 }
 

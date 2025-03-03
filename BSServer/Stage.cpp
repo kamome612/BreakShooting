@@ -28,8 +28,8 @@ void Stage::Initialize()
 			pBlock->SetPosition({ (float)150 + (120 * i) + 50,(float)280 + (200 * j) + (float)2.5,(float)0 });
 			hBlock.push_back(pBlock);
 		}
-
 	}
+
 	for (int i = 0; i < 11; i++)
 	{
 		Block* pBlock2 = Instantiate<Block>(GetParent());
