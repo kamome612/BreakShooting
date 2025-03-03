@@ -91,7 +91,8 @@ void Player::Update()
 			float time = bullet->GetBulletTime();*/
 			int type = 6;
 			//long sendData[5] = { htonl(type),htonl(bPos.x),htonl(bPos.y),htonl(angle),htonl(time) };
-			long sendData[2] = { htonl(type),htonl(rAngle)};
+			//long sendData[2] = { htonl(type),htonl(rAngle)};
+			long sendData = type;
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
