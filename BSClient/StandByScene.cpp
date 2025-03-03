@@ -18,7 +18,7 @@ void StandByScene::Update()
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 	sendIp_.d1 = 192;
 	sendIp_.d2 = 168;
-	sendIp_.d3 = 43;
+	sendIp_.d3 = 42;
 	sendIp_.d4 = 39;
 	//int recvPort;
 	int s;
