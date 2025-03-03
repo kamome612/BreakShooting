@@ -119,10 +119,10 @@ void PlayScene::Update()
 			printfDx("エラー");
 			break;
 		case -2:
-			printDx("受信データよりバッファのサイズの方が小さい");
+			printfDx("受信データよりバッファのサイズの方が小さい");
 			break;
 		case -3:
-			printDx("受信データがない");
+			printfDx("受信データがない");
 			break;
 		default:
 			break;
