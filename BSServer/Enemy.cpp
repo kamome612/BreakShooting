@@ -67,8 +67,8 @@ void Enemy::Draw()
 {
 	int x = (int)transform_.position_.x;
 	int y = (int)transform_.position_.y;
-	//DrawGraph(x, y, pImage_, TRUE);
-	DrawRotaGraph(x, y, 1, XM_PI,pImage_, false, false);
+	DrawGraph(x, y, pImage_, TRUE);
+	//DrawRotaGraph(x, y, 1, XM_PI,pImage_, false, false);
 
 	// ƒ‰ƒCƒt‚Ì˜g
 	int lenF = 900;  // xˆÚ“®
