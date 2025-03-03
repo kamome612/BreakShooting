@@ -76,13 +76,13 @@ void PlayScene::Update()
 	};*/
 
 	int bType = 0;
-	float bData = 0;
-	//float bData[2] = { 0,0 };
+	float bData[2] = { 0,0 };
 	//BulletData bulletData_ = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
-		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bData, sizeof(bData), peek);
+		//ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bData, sizeof(bData), peek);
+		ret = NetWorkRecvUDP(sock, &recvIp, &recvPort, &bType, sizeof(bType), peek);
 		//bType = (int)ntohl(bData[0]);
-		bType = (int)ntohl(bData);
+		bType = (int)ntohl(bType);
 	}
 	if (ret > 0 && bType == 6)
 	{
