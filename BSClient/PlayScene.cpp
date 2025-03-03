@@ -46,7 +46,7 @@ void PlayScene::Update()
 		ret = NetWorkRecvUDP(sock, &Ip, &recvPort, &recvData, sizeof(recvData), peek);
 		type = recvData[0];
 	}
-	if (ret > 0 && type == 1) {
+	if (ret > 0 && type == 1 && recvData[1] > 0) {
 		ePos.x = recvData[1];
 		ePos.y = recvData[2];
 		ePos.z = 0;
@@ -73,7 +73,7 @@ void PlayScene::Update()
 		ret = NetWorkRecvUDP(sock, &Ip, &recvPort, &recvData, sizeof(recvData), peek);
 		type = recvData[0];
 	}
-	if (ret > 0 && type == 1) {
+	if (ret > 0 && type == 1 && recvData[1] > 0) {
 		ePos.x = recvData[1];
 		ePos.y = recvData[2];
 		ePos.z = 0;
