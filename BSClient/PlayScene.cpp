@@ -36,7 +36,7 @@ void PlayScene::Update()
 
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
-	long sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
+	float sendPos[3] = { htonl(pPos.x),htonl(pPos.y),htonl(pPos.z) };
 
 	int ret = NetWorkSendUDP(sock, sendIp, 8888, &sendPos, sizeof(sendPos));
     
@@ -44,7 +44,7 @@ void PlayScene::Update()
 	int peek = 0;
 	int type;
 	XMFLOAT3 ePos = pEnemy->GetPosition();
-	long recvData[3] = { 0,0,0 };
+	float recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &sendIp, &recvPort, &recvData, sizeof(recvData), peek);
 		//type = (int)ntohl(recvData[0]);
