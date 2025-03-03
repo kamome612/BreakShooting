@@ -96,8 +96,7 @@ void PlayScene::Update()
 		bPos.y += 64;
 		//bPos.x -= 30;
 		pBullet->SetPosition(bPos.x, bPos.y);
-		//pBullet->SetAngle(XM_PI/2);
-		pBullet->SetAngle(XM_PI/2,-rAngle);
+		pBullet->SetAngle(XM_PI/2,XM_2PI - rAngle);
 		pPlayer->SetBullets(pBullet);
 		
 		//XMFLOAT3 bulletPos = pBullet->GetPosition();
