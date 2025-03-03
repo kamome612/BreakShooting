@@ -182,16 +182,16 @@ void Bullet::BlockJudge()
 		}
 	}
 
-	for (auto& blocks : dBlocks) {
-		blocks->KillMe();
+	//for (auto& blocks : dBlocks) {
+	//	blocks->KillMe();
 
-		//—v‘f‚³‚ª‚µ
-		std::vector<Block*>::iterator it = std::find(Stage::hBlock.begin(), Stage::hBlock.end(), blocks);
-		if (it != Stage::hBlock.end())
-		{
-			Stage::hBlock.erase(it); // íœ
-		}
-	}
+	//	//—v‘f‚³‚ª‚µ
+	//	std::vector<Block*>::iterator it = std::find(Stage::hBlock.begin(), Stage::hBlock.end(), blocks);
+	//	if (it != Stage::hBlock.end())
+	//	{
+	//		Stage::hBlock.erase(it); // íœ
+	//	}
+	//}
 }
 
 bool Bullet::IsAlive()
