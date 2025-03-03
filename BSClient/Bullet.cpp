@@ -131,8 +131,22 @@ void Bullet::WallJudge()
 	}
 
 	if (transform_.position_.y > low - MARGIN) {//ínñ 
-		transform_.position_.y = low - MARGIN;
-		angle_ = -angle_;
+		if (angle_ == (XM_PI / -2.0)) {//90ìxÇæÇ¡ÇΩÇÁ
+			angle_ = randomAngle_;
+			//if (rand() % 2 == 0)
+			//{
+			//	angle_ = 5.0f * XM_PI / 4.0f;//ç∂
+
+			//}
+			//else {
+			//	angle_ = XM_PI / -4.0;
+
+			//}
+		}
+		else {
+			transform_.position_.y = low - MARGIN;
+			angle_ = -angle_;
+		}
 	}
 
 

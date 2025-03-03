@@ -96,7 +96,7 @@ void PlayScene::Update()
 		bPos.y += 64;
 		//bPos.x -= 30;
 		pBullet->SetPosition(bPos.x, bPos.y);
-		pBullet->SetAngle(90);
+		pBullet->SetAngle(XM_PI/2);
 		//pBullet->SetAngle(90,rAngle);
 		pPlayer->SetBullets(pBullet);
 		

@@ -31,6 +31,10 @@ void ResultScene::Update()
 	{
 		pSceneManager->ChangeScene(SCENE_ID_TITLE);
 	}
+	if (CheckHitKey(KEY_INPUT_Q))
+	{
+		DxLib_End();
+	}
 }
 
 void ResultScene::Draw()
