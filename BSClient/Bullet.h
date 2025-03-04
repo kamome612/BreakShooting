@@ -36,6 +36,9 @@ public:
     //データ受信
     void DataReception();
 
+    //データの送信
+    void DataTransmission();
+
 private:
     int hImage_;
     float BulletTime_;

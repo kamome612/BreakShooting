@@ -32,6 +32,9 @@ public:
     float GetBulletTime() { return BulletTime_; }
     void SetBulletTime(float _time) { BulletTime_ = _time; }
 
+    //データ受信
+    void DataReception();
+
     //データの送信
     void DataTransmission();
 

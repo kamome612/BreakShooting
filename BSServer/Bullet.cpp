@@ -44,6 +44,7 @@ void Bullet::Initialize()
 
 void Bullet::Update()
 {
+	DataTransmission();
 
 	BulletTime_ += Time::DeltaTime();
 	if (BulletTime_ >= LimitTime_)
@@ -57,7 +58,7 @@ void Bullet::Update()
 	transform_.position_.x += moveX;
 	transform_.position_.y += moveY;
 
-	DataTransmission();
+	DataReception();
 
 	WallJudge();
 	BlockJudge();
@@ -182,6 +183,30 @@ void Bullet::BlockJudge()
 bool Bullet::IsAlive()
 {
 	return !isDead_;
+}
+
+void Bullet::DataReception()
+{
+	int ret = 0;
+	int recvPort;
+	int peek = 0;
+	int type = 3;
+
+	float recvData[3] = { 0,0,0 };
+	if (CheckNetWorkRecvUDP(sock_)) {
+		ret = NetWorkRecvUDP(sock_, &ip_, &recvPort, &recvData, sizeof(recvData), peek);
+		type = recvData[0];
+	}
+	if (ret > 0 && type == 3 && recvData[1] > 0) {
+		transform_.position_.x = recvData[1];
+		transform_.position_.y = recvData[2];
+		transform_.position_.z = 0;
+	}
+	else if (ret == -1 || ret == -2 || ret == -3)
+	{
+		// 受信失敗のエラー確認用
+		//printfDx("%d", ret);
+	}
 }
 
 void Bullet::DataTransmission()
