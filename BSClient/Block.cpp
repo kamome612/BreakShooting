@@ -3,7 +3,7 @@
 
 namespace
 {
-	const float LimitTime_ = 1.5;
+	const float LimitTime_ = 3.0;
 }
 Block::Block(GameObject* parent)
 	:GameObject(parent, "Block"),BlockTime_(0), isDead(false)
