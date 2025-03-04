@@ -34,5 +34,11 @@ public:
 
 	//開放
 	void Release() override;
+
+	//データ受信
+	void DataReception();
+
+	//データ送信(プレイヤー位置)
+	void DataTransmission();
 };
 
