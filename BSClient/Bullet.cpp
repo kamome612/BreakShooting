@@ -210,7 +210,7 @@ void Bullet::DataTransmission()
 {
 	XMFLOAT3 pos = transform_.position_;
 	int type = 3;
-	pos.y = 780 - transform_.position_.y - 64;
+	pos.y = 780 - transform_.position_.y;
 	float sendData[3] = { type,pos.x,pos.y };
 	int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 }
