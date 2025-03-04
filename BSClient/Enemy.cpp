@@ -88,7 +88,7 @@ void Enemy::Draw()
 	}
 
 
-	DrawCircle(x+CHIP_SIZE/2 , y+CHIP_SIZE/2 , 20.0f, GetColor(0, 0, 255), FALSE);
+	//DrawCircle(x+CHIP_SIZE/2 , y+CHIP_SIZE/2 , 20.0f, GetColor(0, 0, 255), FALSE);
 
 
 	//DrawBox(x-CHIP_SIZE/2 , y-CHIP_SIZE/2, x+CHIP_SIZE/2, y +CHIP_SIZE/2, GetColor(0, 0, 255), FALSE);//“–‚½‚è”»’èŠm”F—p
