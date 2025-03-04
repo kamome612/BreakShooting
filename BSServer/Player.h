@@ -34,8 +34,6 @@ public:
 
 	bool CollideCircle(float x, float y, float r);
 
-	//Bullets‚Ç‚à‚ÌˆÊ’u‘—M
-	void SendBulletData();
 private:
 	int pImage_;
 	int lImage_;

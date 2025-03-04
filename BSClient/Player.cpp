@@ -47,11 +47,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	//’e’B‚Ì‘—M
-	RecvBulletData();
-
-	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-
 	float x = transform_.position_.x;
 	float y = transform_.position_.y;
 
@@ -218,15 +213,6 @@ bool Player::CollideCircle(float x, float y, float r)
 	else
 	{
 		return false;
-	}
-}
-
-void Player::RecvBulletData()
-{
-	int num = 20;
-	for (Bullet* pBullet : bullets) {
-		pBullet->DataReception(num);
-		num++;
 	}
 }
 

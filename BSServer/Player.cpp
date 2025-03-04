@@ -46,9 +46,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	//’e’B‚Ì‘—M
-	SendBulletData();
-
 	float x = transform_.position_.x;
 	float y = transform_.position_.y;
 
@@ -209,15 +206,6 @@ bool Player::CollideCircle(float x, float y, float r)
 	else
 	{
 		return false;
-	}
-}
-
-void Player::SendBulletData()
-{
-	int type = 20;
-	for (Bullet* pBullet : bullets) {
-		pBullet->DataTransmission(type);
-		type++;
 	}
 }
 

@@ -66,7 +66,7 @@ void Bullet::Update()
 
 void Bullet::Draw()
 {
-	int x = (int)transform_.position_.x + posX;
+	int x = (int)(transform_.position_.x + posX);
 	int y = (int)transform_.position_.y;
 
 	//DrawGraph(x, y, hImage_, TRUE);
