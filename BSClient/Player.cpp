@@ -87,10 +87,14 @@ void Player::Update()
 			rAngle = bullet->GetRandomAngle();
 
 			//ëóêM
+			//int type = 2;
+			////float sendData[2] = { htonl(type),htonl(rAngle)};
+			//float sendData[3] = { type, rAngle, 0};
+			////long sendData = htonl(type);
+			//int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
+
 			int type = 2;
-			//float sendData[2] = { htonl(type), htonl(rAngle)};
-			float sendData[3] = { type, rAngle, 0 };
-			//long sendData = htonl(type);
+			float sendData[3] = { htonl(type), htonl(rAngle), htonl(0) };
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
 	}
