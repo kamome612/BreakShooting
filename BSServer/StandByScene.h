@@ -5,8 +5,11 @@ class StandByScene :
 {
 private:
 	int sPict_;
+	int sButton_;
 	int sock_;
 	IPDATA recvIp_;
+	bool connectOK;
+
 public:
 	//コンストラクタ
 	StandByScene(GameObject* parent);

@@ -7,7 +7,7 @@ std::vector<Bullet*> bullets;
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 400;
-	const XMFLOAT3 INIT_POS = { 320,540,0 };//最初の位置
+	const XMFLOAT3 INIT_POS = { 618,570,0 };//最初の位置
 	const float RWIDTH = 1200; //ステージの右
 	const float LWIDTH = 100; //ステージの左
 	const float HEIGHT = 680; //ステージの高さ
@@ -15,14 +15,14 @@ namespace {
 	const float FINV_TIME = 1.0f;//無敵終了時間
 	const float DEATH_TIME = 2.0f;
 
-	const int MAX_BULLET = 5;//弾の最大数
+	const int MAX_BULLET = 3;//弾の最大数
 	//const float INTERVAL = 3.0f;//リロード時間
 }
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1), lImage_(-1), dImage_(-1), BImage_(-1),
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
-	currentNum_(MAX_BULLET),hitFlag_(false),invTime_(0.0f)
+	currentNum_(MAX_BULLET),hitFlag_(false),invTime_(0.0f),myBulletNum_(0)
 {
 	sock_ = pSceneManager->GetSock();
 	ip_ = pSceneManager->GetIP();
@@ -98,7 +98,7 @@ void Player::Update()
 	for (int i = bullets.size() - 1; i >= 0; i--)
 	{
 		if (!bullets[i]->IsAlive()) {
-			bullets[i]->KillMe();
+			//bullets[i]->KillMe();
 			bullets.erase(bullets.begin() + i);//削除
 		}
 	}

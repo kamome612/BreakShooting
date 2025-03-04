@@ -1,11 +1,10 @@
 #include "ResultScene.h"
-#include "Engine/SceneManager.h"
 
 ResultScene::ResultScene(GameObject* parent)
 	:GameObject(parent, "ResultScene"),rPict_(-1),isWin_(false)
 {
-	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManager");
 	isWin_ = scenemanager->GetWinFlag();
+	sock_ = scenemanager->GetSock();
 }
 
 ResultScene::~ResultScene()
@@ -33,6 +32,7 @@ void ResultScene::Update()
 	}
 	if (CheckHitKey(KEY_INPUT_Q))
 	{
+		DeleteUDPSocket(sock_);
 		DxLib_End();
 	}
 }

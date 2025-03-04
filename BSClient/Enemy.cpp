@@ -6,7 +6,7 @@
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
-	const XMFLOAT3 INIT_POS = { 320,180,0 };
+	const XMFLOAT3 INIT_POS = { 618,146,0 };
 	const float FINV_TIME = 1.0f;//無敵終了時間
 }
 Enemy::Enemy(GameObject* parent)
@@ -88,7 +88,7 @@ void Enemy::Draw()
 	}
 
 
-	DrawCircle(x+CHIP_SIZE/2 , y+CHIP_SIZE/2 , 20.0f, GetColor(0, 0, 255), FALSE);
+	//DrawCircle(x+CHIP_SIZE/2 , y+CHIP_SIZE/2 , 20.0f, GetColor(0, 0, 255), FALSE);
 
 
 	//DrawBox(x-CHIP_SIZE/2 , y-CHIP_SIZE/2, x+CHIP_SIZE/2, y +CHIP_SIZE/2, GetColor(0, 0, 255), FALSE);//当たり判定確認用

@@ -33,6 +33,7 @@ public:
 	void SetBullets(Bullet* b);
 
 	bool CollideCircle(float x, float y, float r);
+
 private:
 	int pImage_;
 	int lImage_;
@@ -47,6 +48,7 @@ private:
 	float invTime_; //–³“GŽžŠÔ
 	bool hitFlag_;
 	int sock_;
+	int myBulletNum_;
 	IPDATA ip_;
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 };

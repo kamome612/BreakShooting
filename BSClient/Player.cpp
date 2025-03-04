@@ -8,7 +8,7 @@ std::vector<Bullet*> bullets;
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 400;
-	const XMFLOAT3 INIT_POS = { 320,540,0 };//最初の位置
+	const XMFLOAT3 INIT_POS = { 618,570,0 };//最初の位置
 	const float RWIDTH = 1200; //ステージの右
 	const float LWIDTH = 100; //ステージの左
 	const float HEIGHT = 680; //ステージの高さ
@@ -16,7 +16,7 @@ namespace {
 	const float FINV_TIME = 1.0f;//無敵終了時間
 	const float DEATH_TIME = 2.0f;
 
-	const int MAX_BULLET = 5;//弾の最大数
+	const int MAX_BULLET = 3;//弾の最大数
 	//const float INTERVAL = 3.0f;//リロード時間
 }
 
@@ -47,8 +47,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-
 	float x = transform_.position_.x;
 	float y = transform_.position_.y;
 
@@ -88,8 +86,8 @@ void Player::Update()
 
 			//送信
 			int type = 2;
-			//float sendData[2] = { htonl(type), htonl(rAngle)};
-			float sendData[3] = { type, rAngle, 0 };
+			//float sendData[2] = { htonl(type),htonl(rAngle)};
+			float sendData[3] = { type, rAngle, 0};
 			//long sendData = htonl(type);
 			int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 		}
@@ -101,7 +99,7 @@ void Player::Update()
 	for (int i = bullets.size() - 1; i >= 0; i--)
 	{
 		if (!bullets[i]->IsAlive()) {
-			bullets[i]->KillMe();
+			//bullets[i]->KillMe();
 			bullets.erase(bullets.begin() + i);//削除
 		}
 	}
@@ -174,7 +172,7 @@ void Player::Draw()
 		DrawExtendGraph((CHIP_SIZE * i) + 100, lenY, (CHIP_SIZE * i) - 40, lenY + 45, lImage_, TRUE);
 	}
 
-	DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
+	//DrawBox(x , y, x + CHIP_SIZE , y + CHIP_SIZE, GetColor(0, 0, 255), FALSE);//当たり判定確認用
 
 	//DrawCircle(x + CHIP_SIZE / 2, y + CHIP_SIZE / 2, 20.0f, GetColor(0, 0, 255), FALSE);
 	

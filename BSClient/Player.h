@@ -33,6 +33,7 @@ public:
 	void SetBullets(Bullet* b);
 	
 	bool CollideCircle(float x, float y, float r);
+
 private:
 	int pImage_;
 	int lImage_;

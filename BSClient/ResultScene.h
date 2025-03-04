@@ -1,11 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/SceneManager.h"
 class ResultScene :
 	public GameObject
 {
 private:
 	int rPict_;
 	bool isWin_;
+	int sock_;
+	SceneManager* scenemanager = (SceneManager*)FindObject("SceneManager");
 public:
 	//コンストラクタ
 	ResultScene(GameObject* parent);
