@@ -6,7 +6,7 @@
 
 namespace
 {
-	const float Speed_{ 550.0 };
+	const float Speed_{ 400.0 };
 	const float LimitTime_ = 4.0f;
 
 	const float Lwidth = 100; //ç∂ï«
