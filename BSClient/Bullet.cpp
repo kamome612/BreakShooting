@@ -6,7 +6,7 @@
 
 namespace
 {
-	const float Speed_{ 400.0 };
+	const float Speed_{350.0 };
 	const float LimitTime_ = 4.0f;
 
 	const float Lwidth = 100; //ç∂ï«
@@ -81,7 +81,7 @@ void Bullet::Draw()
 	//DrawGraph(x, y, hImage_, TRUE);
 	DrawRotaGraph(x, y, 1, angle_ - 80.1, hImage_, TRUE);
 
-	DrawCircle(x-1,y, 8.0f, GetColor(0, 0, 255), FALSE);
+	//DrawCircle(x-1,y, 8.0f, GetColor(0, 0, 255), FALSE);
 }
 
 void Bullet::SetPosition(float _x, float _y)
