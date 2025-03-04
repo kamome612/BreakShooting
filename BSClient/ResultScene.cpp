@@ -33,7 +33,7 @@ void ResultScene::Update()
 	}
 	if (CheckHitKey(KEY_INPUT_Q))
 	{
-		DeleteUDPSocket(sock);
+		DeleteUDPSocket(sock_);
 		DxLib_End();
 	}
 }
