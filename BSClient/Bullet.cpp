@@ -21,7 +21,7 @@ namespace
 
 Bullet::Bullet(GameObject* parent)
 	:GameObject(parent, "Bullet"), hImage_(-1), BulletTime_(0), angle_(XM_PI / -2.0), moveX(0), moveY(0)
-                                 , isDead_(false)
+                                 , isDead_(false),isEnemy_(false)
 {
 	ip_ = pSceneManager->GetIP();
 	sock_ = pSceneManager->GetSock();
@@ -29,8 +29,14 @@ Bullet::Bullet(GameObject* parent)
 
 void Bullet::Initialize()
 {
-	hImage_ = LoadGraph("Assets\\Image\\missile.png");
-	assert(hImage_ > 0);
+	if (isEnemy_) {
+		hImage_ = LoadGraph("Assets\\Image\\missile2.png");
+		assert(hImage_ > 0);
+	}
+	else {
+		hImage_ = LoadGraph("Assets\\Image\\missile.png");
+		assert(hImage_ > 0);
+	}
 
 	if (rand() % 2 == 0)
 	{

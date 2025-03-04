@@ -31,6 +31,7 @@ public:
 
     float GetBulletTime() { return BulletTime_; }
     void SetBulletTime(float _time) { BulletTime_ = _time; }
+    void SetType(bool _isEnemy) { isEnemy_ = _isEnemy; }
 private:
     int hImage_;
     float BulletTime_;
@@ -39,6 +40,7 @@ private:
     float moveX;
     float moveY;
     float randomAngle_; //‚’¼‚É•Ç‚É“–‚½‚Á‚½‚Ì•ÏX‚Ég‚¤Šp“x
+    bool isEnemy_;
     int sock_;
     IPDATA ip_;
     SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
