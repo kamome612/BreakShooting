@@ -33,6 +33,7 @@ void PlayScene::Update()
 	DataReception();
 	DataTransmission();
 	DataReception();
+	DataReception();
 	
 	//int ret = 0;
 	//int recvPort;

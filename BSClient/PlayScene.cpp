@@ -29,6 +29,7 @@ void PlayScene::Update()
 	fpsTimer_ += Time::DeltaTime();
 	fpsCount_++;*/
 
+	DataReception();
 	DataTransmission();
 	DataReception();
 	DataReception();
