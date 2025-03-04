@@ -147,12 +147,11 @@ void PlayScene::DataReception()
 	float recvData[3] = { 0,0,0 };
 	if (CheckNetWorkRecvUDP(sock)) {
 		ret = NetWorkRecvUDP(sock, &Ip, &recvPort, &recvData, sizeof(recvData), peek);
-		type = (int)ntohl(recvData[0]);
+		type = recvData[0];
 	}
-	int num = (float)ntohl(recvData[1]);
-	if (ret > 0 && type == 1 && num > 0) {
-		ePos.x = (float)ntohl(recvData[1]);
-		ePos.y = (float)ntohl(recvData[2]);
+	if (ret > 0 && type == 1 && recvData[1] > 0) {
+		ePos.x = recvData[1];
+		ePos.y = recvData[2];
 		ePos.z = 0;
 		pEnemy->SetPosition(ePos);
 	}
@@ -161,7 +160,7 @@ void PlayScene::DataReception()
 		Bullet* pBullet = Instantiate<Bullet>(GetParent());
 		Enemy* pEnemy = (Enemy*)FindObject("Enemy");
 		XMFLOAT3 bPos = pEnemy->GetPosition();
-		float rAngle = (float)ntohl(recvData[1]);
+		float rAngle = recvData[1];
 		bPos.y += 64;
 		pBullet->SetPosition(bPos.x, bPos.y);
 		pBullet->SetAngle(XM_PI / 2, XM_2PI - rAngle);
@@ -172,40 +171,6 @@ void PlayScene::DataReception()
 		// 受信失敗のエラー確認用
 		//printfDx("%d", ret);
 	}
-
-	//int ret = 0;
-	//int recvPort;
-	//int peek = 0;
-	//int type = 0;
-
-	//XMFLOAT3 ePos = pEnemy->GetPosition();
-	//float recvData[3] = { 0,0,0 };
-	//if (CheckNetWorkRecvUDP(sock)) {
-	//	ret = NetWorkRecvUDP(sock, &Ip, &recvPort, &recvData, sizeof(recvData), peek);
-	//	type = recvData[0];
-	//}
-	//if (ret > 0 && type == 1 && recvData[1] > 0) {
-	//	ePos.x = recvData[1];
-	//	ePos.y = recvData[2];
-	//	ePos.z = 0;
-	//	pEnemy->SetPosition(ePos);
-	//}
-	//else if (ret > 0 && type == 2) {
-	//	Player* pPlayer = (Player*)FindObject("Player");
-	//	Bullet* pBullet = Instantiate<Bullet>(GetParent());
-	//	Enemy* pEnemy = (Enemy*)FindObject("Enemy");
-	//	XMFLOAT3 bPos = pEnemy->GetPosition();
-	//	float rAngle = recvData[1];
-	//	bPos.y += 64;
-	//	pBullet->SetPosition(bPos.x, bPos.y);
-	//	pBullet->SetAngle(XM_PI / 2, XM_2PI - rAngle);
-	//	pPlayer->SetBullets(pBullet);
-	//}
-	//else if (ret == -1 || ret == -2 || ret == -3)
-	//{
-	//	// 受信失敗のエラー確認用
-	//	//printfDx("%d", ret);
-	//}
 }
 
 void PlayScene::DataTransmission()
@@ -214,13 +179,6 @@ void PlayScene::DataTransmission()
 	XMFLOAT3 pPos = pPlayer->GetPosition();
 	pPos.y = 180.0f;
 	int type = 1;
-	float sendData[3] = { htonl(type),htonl(pPos.x),htonl(pPos.y) };
-	ret = NetWorkSendUDP(sock, Ip, 8888, &sendData, sizeof(sendData));
-
-	/*int ret = 0;
-	XMFLOAT3 pPos = pPlayer->GetPosition();
-	pPos.y = 180.0f;
-	int type = 1;
 	float sendData[3] = { type,pPos.x,pPos.y };
-	ret = NetWorkSendUDP(sock, Ip, 8888, &sendData, sizeof(sendData));*/
+	ret = NetWorkSendUDP(sock, Ip, 8888, &sendData, sizeof(sendData));
 }
