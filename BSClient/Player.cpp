@@ -223,7 +223,7 @@ void Player::RecvBulletData()
 	int num = 20;
 	for (Bullet* pBullet : bullets) {
 		pBullet->DataReception(num);
-		type++;
+		num++;
 	}
 }
 
