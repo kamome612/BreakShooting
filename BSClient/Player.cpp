@@ -218,6 +218,15 @@ bool Player::CollideCircle(float x, float y, float r)
 	}
 }
 
+void Player::RecvBulletData()
+{
+	int num = 20;
+	for (Bullet* pBullet : bullets) {
+		pBullet->DataReception(num);
+		type++;
+	}
+}
+
 //void Player::Reload()
 //{
 //	reloadTime_ += Time::DeltaTime();

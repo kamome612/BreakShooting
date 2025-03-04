@@ -36,7 +36,7 @@ public:
     void DataReception();
 
     //データの送信
-    void DataTransmission();
+    void DataTransmission(int _type);
 
 private:
     int hImage_;

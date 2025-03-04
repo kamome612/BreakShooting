@@ -44,7 +44,7 @@ void Bullet::Initialize()
 
 void Bullet::Update()
 {
-	DataReception();
+	//DataReception();
 
 	BulletTime_ += Time::DeltaTime();
 	if (BulletTime_ >= LimitTime_)
@@ -182,7 +182,7 @@ bool Bullet::IsAlive()
 	return !isDead_;
 }
 
-void Bullet::DataReception()
+void Bullet::DataReception(int num)
 {
 	int ret = 0;
 	int recvPort;
@@ -194,7 +194,7 @@ void Bullet::DataReception()
 		ret = NetWorkRecvUDP(sock_, &ip_, &recvPort, &recvData, sizeof(recvData), peek);
 		type = recvData[0];
 	}
-	if (ret > 0 && type == 3 && recvData[1] > 0) {
+	if (ret > 0 && type == num && recvData[1] > 0) {
 		transform_.position_.x = recvData[1];
 		transform_.position_.y = recvData[2];
 		transform_.position_.z = 0;
