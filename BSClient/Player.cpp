@@ -47,6 +47,9 @@ void Player::Initialize()
 
 void Player::Update()
 {
+	//’e’B‚Ì‘—M
+	RecvBulletData();
+
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 
 	float x = transform_.position_.x;
