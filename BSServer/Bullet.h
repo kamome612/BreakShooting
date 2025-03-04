@@ -31,7 +31,10 @@ public:
 
     float GetBulletTime() { return BulletTime_; }
     void SetBulletTime(float _time) { BulletTime_ = _time; }
-    void SetType(bool _isEnemy) { isEnemy_ = _isEnemy; }
+    void SetImage(){
+        hImage_ = LoadGraph("Assets\\Image\\missile2.png");
+        assert(hImage_ > 0);
+    }
 private:
     int hImage_;
     float BulletTime_;

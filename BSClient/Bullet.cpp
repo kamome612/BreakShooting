@@ -29,14 +29,17 @@ Bullet::Bullet(GameObject* parent)
 
 void Bullet::Initialize()
 {
-	if (isEnemy_) {
+	/*if (isEnemy_) {
 		hImage_ = LoadGraph("Assets\\Image\\missile2.png");
 		assert(hImage_ > 0);
 	}
 	else {
 		hImage_ = LoadGraph("Assets\\Image\\missile.png");
 		assert(hImage_ > 0);
-	}
+	}*/
+
+	hImage_ = LoadGraph("Assets\\Image\\missile.png");
+	assert(hImage_ > 0);
 
 	if (rand() % 2 == 0)
 	{

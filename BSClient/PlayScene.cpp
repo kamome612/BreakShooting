@@ -164,7 +164,7 @@ void PlayScene::DataReception()
 		pBullet->SetPosition(bPos.x, bPos.y);
 		pBullet->SetAngle(XM_PI / 2, XM_2PI - rAngle);
 		bool tmp = true;
-		pBullet->SetType(tmp);
+		pBullet->SetImage();
 
 		//pPlayer->SetBullets(pBullet);
 	}
