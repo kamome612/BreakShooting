@@ -15,7 +15,7 @@ namespace {
 	const float FINV_TIME = 1.0f;//–³“GI—¹ŠÔ
 	const float DEATH_TIME = 2.0f;
 
-	const int MAX_BULLET = 1;//’e‚ÌÅ‘å”
+	const int MAX_BULLET = 2;//’e‚ÌÅ‘å”
 	//const float INTERVAL = 3.0f;//ƒŠƒ[ƒhŠÔ
 }
 
