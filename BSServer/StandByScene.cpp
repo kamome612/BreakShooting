@@ -2,7 +2,7 @@
 #include "Engine/SceneManager.h"
 
 StandByScene::StandByScene(GameObject* parent)
-	:GameObject(parent,"StandByScene"),sPict_(-1)
+	:GameObject(parent,"StandByScene"),sPict_(-1), connectOK{false}
 {
 }
 
@@ -10,6 +10,8 @@ void StandByScene::Initialize()
 {
 	sPict_ = LoadGraph("Assets\\Picture\\standby.jpg");
 	assert(sPict_ >= 0);
+	sButton_ = LoadGraph("Assets\\Picture\\StButton.png");
+	assert(sButton_ >= 0);
 	sock_ = MakeUDPSocket(8888);
 }
 
@@ -24,9 +26,9 @@ void StandByScene::Update()
 	int recvPort;
 	//long s;
 	int s = 1;
-	static bool connectOK = false;
 	if (connectOK != true) {
 		connectOK = CheckNetWorkRecvUDP(sock_);
+		
 	}
 	if (CheckNetWorkRecvUDP(sock_)) {
 		NetWorkRecvUDP(sock_, &recvIp_, &recvPort, &s, sizeof(s), peek);
@@ -48,12 +50,14 @@ void StandByScene::Draw()
 	int y = (int)transform_.position_.y;
 	int height = 600 / 2;
 	int width = 800 / 2;
-
+	
+	DrawGraph(0, 0, sPict_, TRUE);
 	if (connectOK)
 	{
 		DrawGraph(x + width, y + (height + 50), sButton_, TRUE);
 	}
-	DrawGraph(0, 0, sPict_, TRUE);
+	//DrawGraph(x + width, y + (height + 50), sButton_, TRUE);
+
 }
 
 void StandByScene::Release()
