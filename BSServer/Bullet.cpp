@@ -188,16 +188,18 @@ void Bullet::DataReception()
 	int ret = 0;
 	int recvPort;
 	int peek = 0;
-	int type = 3;
+	int type = 0;
 
-	float recvData[3] = { 0,0,0 };
+	float recvData[5] = { 0,0,0,0,0 };
 	if (CheckNetWorkRecvUDP(sock_)) {
 		ret = NetWorkRecvUDP(sock_, &ip_, &recvPort, &recvData, sizeof(recvData), peek);
 		type = recvData[0];
 	}
-	if (ret > 0 && type == 3 && recvData[1] > 0) {
+	if (ret > 0 && type == num && recvData[1] > 0) {
 		transform_.position_.x = recvData[1];
 		transform_.position_.y = recvData[2];
+		angle_ = recvData[3];
+		BulletTime_ = recvData[4];
 		transform_.position_.z = 0;
 	}
 	else if (ret == -1 || ret == -2 || ret == -3)
@@ -211,6 +213,6 @@ void Bullet::DataTransmission(int _type)
 {
 	XMFLOAT3 pos = transform_.position_;
 	pos.y = 780 - transform_.position_.y;
-	float sendData[3] = { _type,pos.x,pos.y };
+	float sendData[5] = { _type,pos.x,pos.y,angle_,BulletTime_ };
 	int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 }
