@@ -59,8 +59,6 @@ void Bullet::Update()
 	transform_.position_.x += moveX;
 	transform_.position_.y += moveY;
 
-	DataTransmission();
-
 	WallJudge();
 	BlockJudge();
 
@@ -212,7 +210,7 @@ void Bullet::DataTransmission()
 {
 	XMFLOAT3 pos = transform_.position_;
 	int type = 3;
-	pos.y = 780 - transform_.position_.y;
+	pos.y = 780 - transform_.position_.y - 64;
 	float sendData[3] = { type,pos.x,pos.y };
 	int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 }
