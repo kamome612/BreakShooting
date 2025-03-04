@@ -22,7 +22,7 @@ namespace {
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pImage_(-1), lImage_(-1), dImage_(-1), BImage_(-1),
 	fImage_(-1), Life_(3), reloading_(false), reloadTime_(0.0),
-	currentNum_(MAX_BULLET),hitFlag_(false),invTime_(0.0f)
+	currentNum_(MAX_BULLET),hitFlag_(false),invTime_(0.0f),myBulletNum_(0)
 {
 	sock_ = pSceneManager->GetSock();
 	ip_ = pSceneManager->GetIP();
@@ -98,7 +98,7 @@ void Player::Update()
 	for (int i = bullets.size() - 1; i >= 0; i--)
 	{
 		if (!bullets[i]->IsAlive()) {
-			bullets[i]->KillMe();
+			//bullets[i]->KillMe();
 			bullets.erase(bullets.begin() + i);//íœ
 		}
 	}

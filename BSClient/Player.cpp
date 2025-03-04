@@ -99,7 +99,7 @@ void Player::Update()
 	for (int i = bullets.size() - 1; i >= 0; i--)
 	{
 		if (!bullets[i]->IsAlive()) {
-			bullets[i]->KillMe();
+			//bullets[i]->KillMe();
 			bullets.erase(bullets.begin() + i);//íœ
 		}
 	}

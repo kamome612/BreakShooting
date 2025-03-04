@@ -48,6 +48,7 @@ private:
 	float invTime_; //–³“GŽžŠÔ
 	bool hitFlag_;
 	int sock_;
+	int myBulletNum_;
 	IPDATA ip_;
 	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 };
