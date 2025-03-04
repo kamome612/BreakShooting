@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "Engine/time.h"
 #include <string>
+#include "Bullet.h"
 
 PlayScene::PlayScene(GameObject* parent)
 	: GameObject(parent,"PlayScene"),fpsTimer_(0.0f),fpsCount_(0),fps_(0)
@@ -32,7 +33,6 @@ void PlayScene::Update()
 
 	DataReception();
 	DataTransmission();
-	DataReception();
 	DataReception();
 	
 	//int ret = 0;
@@ -178,7 +178,7 @@ void PlayScene::DataTransmission()
 {
 	int ret = 0;
 	XMFLOAT3 pPos = pPlayer->GetPosition();
-	pPos.y = 180.0f;
+	pPos.y = 146.0f;
 	int type = 1;
 	float sendData[3] = { type,pPos.x,pPos.y };
 	ret = NetWorkSendUDP(sock, Ip, 8888, &sendData, sizeof(sendData));

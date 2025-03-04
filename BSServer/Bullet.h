@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/SceneManager.h"
 class Bullet :
     public GameObject
 {
@@ -31,6 +32,9 @@ public:
     float GetBulletTime() { return BulletTime_; }
     void SetBulletTime(float _time) { BulletTime_ = _time; }
 
+    //データの送信
+    void DataTransmission();
+
 private:
     int hImage_;
     float BulletTime_;
@@ -39,5 +43,8 @@ private:
     float moveX;
     float moveY;
     float randomAngle_; //垂直に壁に当たった時の変更に使う角度
+    int sock_;
+    IPDATA ip_;
+    SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 };
 

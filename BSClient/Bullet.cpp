@@ -23,7 +23,8 @@ Bullet::Bullet(GameObject* parent)
 	:GameObject(parent, "Bullet"), hImage_(-1), BulletTime_(0), angle_(XM_PI / -2.0), moveX(0), moveY(0)
                                  , isDead_(false)
 {
-
+	ip_ = pSceneManager->GetIP();
+	sock_ = pSceneManager->GetSock();
 }
 
 void Bullet::Initialize()
@@ -43,6 +44,7 @@ void Bullet::Initialize()
 
 void Bullet::Update()
 {
+	DataReception();
 
 	BulletTime_ += Time::DeltaTime();
 	if (BulletTime_ >= LimitTime_)
@@ -72,7 +74,6 @@ void Bullet::Draw()
 
 	DrawCircle(x-1,y, 8.0f, GetColor(0, 0, 255), FALSE);
 }
-
 
 void Bullet::SetPosition(float _x, float _y)
 {
@@ -179,4 +180,28 @@ void Bullet::BlockJudge()
 bool Bullet::IsAlive()
 {
 	return !isDead_;
+}
+
+void Bullet::DataReception()
+{
+	int ret = 0;
+	int recvPort;
+	int peek = 0;
+	int type = 3;
+
+	float recvData[3] = { 0,0,0 };
+	if (CheckNetWorkRecvUDP(sock_)) {
+		ret = NetWorkRecvUDP(sock_, &ip_, &recvPort, &recvData, sizeof(recvData), peek);
+		type = recvData[0];
+	}
+	if (ret > 0 && type == 3 && recvData[1] > 0) {
+		transform_.position_.x = recvData[1];
+		transform_.position_.y = recvData[2];
+		transform_.position_.z = 0;
+	}
+	else if (ret == -1 || ret == -2 || ret == -3)
+	{
+		// 受信失敗のエラー確認用
+		//printfDx("%d", ret);
+	}
 }

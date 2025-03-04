@@ -6,7 +6,7 @@
 namespace {
 	const float CHIP_SIZE = 64.0f;
 	const float SPEED = 150;
-	const XMFLOAT3 INIT_POS = { 320,150,0 };
+	const XMFLOAT3 INIT_POS = { 618,150,0 };
 	const float FINV_TIME = 1.0f;//ñ≥ìGèIóπéûä‘
 }
 Enemy::Enemy(GameObject* parent)

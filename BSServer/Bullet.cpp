@@ -23,7 +23,8 @@ Bullet::Bullet(GameObject* parent)
 	:GameObject(parent, "Bullet"), hImage_(-1), BulletTime_(0), angle_(XM_PI / -2.0), moveX(0), moveY(0)
 	, isDead_(false)
 {
-
+	ip_ = pSceneManager->GetIP();
+	sock_ = pSceneManager->GetSock();
 }
 
 void Bullet::Initialize()
@@ -55,6 +56,8 @@ void Bullet::Update()
 
 	transform_.position_.x += moveX;
 	transform_.position_.y += moveY;
+
+	DataTransmission();
 
 	WallJudge();
 	BlockJudge();
@@ -179,4 +182,13 @@ void Bullet::BlockJudge()
 bool Bullet::IsAlive()
 {
 	return !isDead_;
+}
+
+void Bullet::DataTransmission()
+{
+	XMFLOAT3 pos = transform_.position_;
+	int type = 3;
+	pos.y = 780 - transform_.position_.y;
+	float sendData[3] = { type,pos.x,pos.y };
+	int ret = NetWorkSendUDP(sock_, ip_, 8888, &sendData, sizeof(sendData));
 }

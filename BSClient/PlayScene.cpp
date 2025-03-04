@@ -29,7 +29,6 @@ void PlayScene::Update()
 	fpsTimer_ += Time::DeltaTime();
 	fpsCount_++;*/
 
-	DataReception();
 	DataTransmission();
 	DataReception();
 	DataReception();
@@ -177,7 +176,7 @@ void PlayScene::DataTransmission()
 {
 	int ret = 0;
 	XMFLOAT3 pPos = pPlayer->GetPosition();
-	pPos.y = 180.0f;
+	pPos.y = 146.0f;
 	int type = 1;
 	float sendData[3] = { type,pPos.x,pPos.y };
 	ret = NetWorkSendUDP(sock, Ip, 8888, &sendData, sizeof(sendData));
