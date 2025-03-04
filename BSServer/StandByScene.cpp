@@ -44,6 +44,15 @@ void StandByScene::Update()
 
 void StandByScene::Draw()
 {
+	int x = (int)transform_.position_.x;
+	int y = (int)transform_.position_.y;
+	int height = 600 / 2;
+	int width = 800 / 2;
+
+	if (connectOK)
+	{
+		DrawGraph(x + width, y + (height + 50), sButton_, TRUE);
+	}
 	DrawGraph(0, 0, sPict_, TRUE);
 }
 
