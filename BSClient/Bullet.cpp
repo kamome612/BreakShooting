@@ -208,7 +208,7 @@ void Bullet::DataReception(int num)
 	}
 }
 
-void Bullet::DataTransmission()
+void Bullet::DataTransmission(int num)
 {
 	XMFLOAT3 pos = transform_.position_;
 	pos.y = 780 - transform_.position_.y;

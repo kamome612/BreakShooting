@@ -183,7 +183,7 @@ bool Bullet::IsAlive()
 	return !isDead_;
 }
 
-void Bullet::DataReception()
+void Bullet::DataReception(int num)
 {
 	int ret = 0;
 	int recvPort;
